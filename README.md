@@ -55,3 +55,110 @@ The contact us page will feature the company's contact information and a interac
 - Social media links: Connects customers to the company's online presence and engagement.
 - Physical address: Displays the company's headquarters or primary location on an interactive map.
 
+## Backend Models and Routes
+
+## Models
+
+### CartItem
+- `_id`: Unique identifier for the cart item
+- `product`: Reference to the `Product` model
+- `quantity`: Number of items in the cart
+- `user`: Reference to the `User` model
+- `createdAt`: Timestamp of when the item was added to the cart
+- `updatedAt`: Timestamp of when the item was last updated
+
+### Category
+- `_id`: Unique identifier for the category
+- `name`: Name of the category
+- `description`: Description of the category
+- `createdAt`: Timestamp of when the category was created
+- `updatedAt`: Timestamp of when the category was last updated
+
+### Image
+- `_id`: Unique identifier for the image
+- `url`: URL of the image
+- `product`: Reference to the `Product` model
+- `createdAt`: Timestamp of when the image was uploaded
+- `updatedAt`: Timestamp of when the image was last updated
+
+### Order
+- `_id`: Unique identifier for the order
+- `user`: Reference to the `User` model
+- `items`: Array of `CartItem` references
+- `totalPrice`: Total price of the order
+- `paymentMethod`: Payment method used for the order
+- `status`: Status of the order (e.g., pending, shipped, delivered)
+- `createdAt`: Timestamp of when the order was placed
+- `updatedAt`: Timestamp of when the order status was last updated
+
+### Product
+- `_id`: Unique identifier for the product
+- `name`: Name of the product
+- `description`: Description of the product
+- `price`: Price of the product
+- `category`: Reference to the `Category` model
+- `images`: Array of `Image` references
+- `inventory`: Number of items in stock
+- `createdAt`: Timestamp of when the product was added
+- `updatedAt`: Timestamp of when the product was last updated
+
+### Service
+- `_id`: Unique identifier for the service
+- `name`: Name of the service
+- `description`: Description of the service
+- `price`: Price of the service
+- `availability`: Availability status of the service
+- `createdAt`: Timestamp of when the service was added
+- `updatedAt`: Timestamp of when the service was last updated
+
+### User
+- `_id`: Unique identifier for the user
+- `name`: Full name of the user
+- `email`: Email address of the user
+- `password`: Hashed password of the user
+- `role`: Role of the user (e.g., customer, admin)
+- `createdAt`: Timestamp of when the user account was created
+- `updatedAt`: Timestamp of when the user account was last updated
+
+## Routes
+
+### Products
+- `GET /api/products`: Retrieve a list of all products
+- `GET /api/products/:id`: Retrieve details of a specific product
+- `POST /api/products`: Create a new product
+- `PUT /api/products/:id`: Update an existing product
+- `DELETE /api/products/:id`: Delete a product
+
+### Categories
+- `GET /api/categories`: Retrieve a list of all categories
+- `GET /api/categories/:id`: Retrieve details of a specific category
+- `POST /api/categories`: Create a new category
+- `PUT /api/categories/:id`: Update an existing category
+- `DELETE /api/categories/:id`: Delete a category
+
+### Services
+- `GET /api/services`: Retrieve a list of all services
+- `GET /api/services/:id`: Retrieve details of a specific service
+- `POST /api/services`: Create a new service
+- `PUT /api/services/:id`: Update an existing service
+- `DELETE /api/services/:id`: Delete a service
+
+### Cart
+- `GET /api/cart`: Retrieve the items in the user's cart
+- `POST /api/cart`: Add an item to the user's cart
+- `PUT /api/cart/:id`: Update the quantity of an item in the user's cart
+- `DELETE /api/cart/:id`: Remove an item from the user's cart
+
+### Orders
+- `GET /api/orders`: Retrieve a list of all orders (for admin)
+- `GET /api/orders/user`: Retrieve a list of the user's orders
+- `GET /api/orders/:id`: Retrieve details of a specific order
+- `POST /api/orders`: Create a new order
+- `PUT /api/orders/:id`: Update the status of an order
+
+### Users
+- `GET /api/users`: Retrieve a list of all users (for admin)
+- `GET /api/users/:id`: Retrieve details of a specific user
+- `POST /api/users`: Create a new user
+- `PUT /api/users/:id`: Update an existing user
+- `DELETE /api/users/:id`: Delete a user
