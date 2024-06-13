@@ -162,3 +162,39 @@ The contact us page will feature the company's contact information and a interac
 - `POST /api/users`: Create a new user
 - `PUT /api/users/:id`: Update an existing user
 - `DELETE /api/users/:id`: Delete a user
+
+# RELATIONSHIPS
+The provided code demonstrates a set of relationships between the various models in an e-commerce application. Here's a breakdown of the relationships:
+
+1. `CartItem` model:
+   - `user`: One-to-many relationship with the `User` model, where a user can have multiple cart items, and each cart item belongs to a single user.
+   - `service`: One-to-many relationship with the `Service` model, where a service can be associated with multiple cart items, but each cart item is linked to a single service.
+   - `order`: One-to-many relationship with the `Order` model, where a cart item can be associated with a single order, but an order can have multiple cart items.
+
+2. `Category` model:
+   - `products`: One-to-many relationship with the `Product` model, where a category can have multiple products, but each product belongs to a single category.
+
+3. `Image` model:
+   - `product`: One-to-many relationship with the `Product` model, where a product can have multiple images, but each image is associated with a single product.
+
+4. `Order` model:
+   - `user`: One-to-many relationship with the `User` model, where a user can have multiple orders, but each order belongs to a single user.
+   - `services`: Many-to-many relationship with the `Service` model, where an order can be associated with multiple services, and a service can be associated with multiple orders.
+   - `cart_items`: One-to-many relationship with the `CartItem` model, where an order can have multiple cart items, but each cart item belongs to a single order.
+
+5. `OrderService` model:
+   - `order`: Many-to-one relationship with the `Order` model, where an order service is associated with a single order.
+   - `service`: Many-to-one relationship with the `Service` model, where an order service is associated with a single service.
+
+6. `Product` model:
+   - `images`: One-to-many relationship with the `Image` model, where a product can have multiple images, but each image is associated with a single product.
+   - `cart_items`: One-to-many relationship with the `CartItem` model, where a product can be associated with multiple cart items, but each cart item is linked to a single product.
+
+7. `Service` model:
+   - `orders`: Many-to-many relationship with the `Order` model, where a service can be associated with multiple orders, and an order can be associated with multiple services.
+
+8. `User` model:
+   - `orders`: One-to-many relationship with the `Order` model, where a user can have multiple orders, but each order belongs to a single user.
+   - `cart_items`: One-to-many relationship with the `CartItem` model, where a user can have multiple cart items, but each cart item belongs to a single user.
+
+These relationships allow you to navigate and access related data across the different models, enabling you to perform various operations, such as fetching a user's orders, retrieving the products in a cart, or identifying the services associated with a specific order.
