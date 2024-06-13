@@ -2,8 +2,11 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from flask_cors import CORS
-from models.dbconfig import db
+from models.cartItem import CartItem
 from models.product import Product
+from models.image import Image
+from models.category import Category
+from models.dbconfig import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -16,7 +19,7 @@ db.init_app(app)
 
 api = Api(app)
 
-class WelcomeResource(Resource):
+'''class WelcomeResource(Resource):
     def get(self):
         return {'message': 'Geocel Enterprises Limited'}
 api.add_resource(WelcomeResource, '/')
@@ -37,7 +40,7 @@ class ProductResource(Resource):
             })
         return result
 
-api.add_resource(ProductResource, '/products')
+api.add_resource(ProductResource, '/products')'''
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
