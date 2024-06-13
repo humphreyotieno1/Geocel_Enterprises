@@ -1,18 +1,16 @@
 from sqlalchemy.orm import relationship
-from dbconfig import db
+from .dbconfig import db
 from datetime import datetime
 from enum import Enum as PyEnum
 from sqlalchemy import Enum
 
-
 class View(PyEnum):
     IMAGE = 'image'
     VIDEO = 'video'
-    
-    
+
 class Product(db.Model):
     __tablename__ = 'products'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=True)
@@ -22,13 +20,13 @@ class Product(db.Model):
     rating = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-    
-    
-    # relationships
+
+    # Relationships
     images = relationship('Image', back_populates='product')
-    category = relationship('Category', backref='products')
-    brand = relationship('Brand', backref='products')
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
     cart_items = relationship('CartItem', backref='product')
 
     def __repr__(self):
-        return f"Product(id={self.id}, name='{self.name}', price={self.price}, view_type='{self.view_type.value}', rating={self.rating})"
+        return f"Product(id={self.id}, name='{self.name}', price={self.price}, view_type='{self.view.value}', rating={self.rating})"
+    

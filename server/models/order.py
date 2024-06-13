@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-from dbconfig import db
+from .dbconfig import db
 from datetime import datetime
 
 class Order(db.Model):
@@ -26,3 +26,4 @@ class OrderService(db.Model):
 
     order = relationship('Order', backref='order_services')
     service = relationship('Service', backref='order_services')
+    

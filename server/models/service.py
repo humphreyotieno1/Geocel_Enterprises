@@ -1,5 +1,4 @@
-from sqlalchemy.orm import relationship
-from dbconfig import db
+from .dbconfig import db
 from datetime import datetime
 
 class Service(db.Model):
@@ -14,7 +13,8 @@ class Service(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
 
     # Relationships
-    orders = relationship('Order', secondary='order_services', back_populates='services')
+    orders = db.relationship('Order', secondary='order_services', back_populates='services')
 
     def __repr__(self):
         return f"Service(id={self.id}, name='{self.name}', price={self.price}, duration={self.duration})"
+    
