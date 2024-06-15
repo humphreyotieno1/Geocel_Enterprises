@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Box, Flex, Heading, Text, Button, Image, VStack, useColorModeValue } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { Box, Flex, Text, Button, Image, useColorModeValue } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 
 const HomePage = () => {
@@ -30,19 +30,22 @@ const HomePage = () => {
   }, [controls, titleControls]);
 
   return (
-    <Box>
+    <Box height="100vh" width="100vw" overflow="hidden" margin={0} padding={0}>
       <Flex
         as={motion.div}
         initial={{ y: -50, opacity: 0 }}
         animate={controls}
         direction="column"
         position="relative"
+        height="100%"
+        width="100%"
       >
         <Image
           src="/geocel.jpg"
           alt="Geocel Enterprises Hardware"
           width="100%"
-          height="auto"
+          height="100%"
+          objectFit="cover"
           borderRadius="none"
           boxShadow="none"
         />
