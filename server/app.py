@@ -1,46 +1,44 @@
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
-from flask_restful import Api, Resource
+from flask_restful import Api
 from flask_cors import CORS
-from models.cartItem import CartItem
+
+#local imports
+from dbconfig import db
+from models.user import User
 from models.product import Product
-from models.image import Image
 from models.category import Category
-from models.dbconfig import db
+from models.cart_item import CartItem
+from models.order import Order
+from models.service import Service
+
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = True
 
-CORS(app, supports_credentials=True)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.json.compact = False
+
+
+
+
 migrate = Migrate(app, db)
 db.init_app(app)
 
+
 api = Api(app)
+bcrypt = Bcrypt(app)
 
-'''class WelcomeResource(Resource):
-    def get(self):
-        return {'message': 'Geocel Enterprises Limited'}
-api.add_resource(WelcomeResource, '/')
+CORS(app)
 
-class ProductResource(Resource):
-    def get(self):
-        products = Product.query.all()
-        result = []
-        for product in products:
-            result.append({
-                'id': product.id,
-                'name': product.name,
-                'description': product.description,
-                'price': product.price,
-                'stock': product.stock,
-                'rating': product.rating,
-                'imagelink': product.imagelink
-            })
-        return result
 
-api.add_resource(ProductResource, '/products')'''
 
-if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

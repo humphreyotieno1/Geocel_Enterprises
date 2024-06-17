@@ -1,32 +1,26 @@
-from sqlalchemy.orm import relationship
-from .dbconfig import db
-from datetime import datetime
-from enum import Enum as PyEnum
-from sqlalchemy import Enum
+from dbconfig import db
+from sqlalchemy_serializer import SerializerMixin
 
-class View(PyEnum):
-    IMAGE = 'image'
-    VIDEO = 'video'
 
-class Product(db.Model):
+
+class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=True)
-    view = db.Column(Enum(View), nullable=False, default=View.IMAGE)
+    image_url = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     rating = db.Column(db.Float, nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-
-    # Relationships
-    images = relationship('Image', back_populates='product')
+    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
-    cart_items = relationship('CartItem', backref='product')
-
-    def __repr__(self):
-        return f"Product(id={self.id}, name='{self.name}', price={self.price}, view_type='{self.view.value}', rating={self.rating})"
     
+    # Relationships
+    category = db.relationship('Category', back_populates='category')
+    cart_items = db.relationship('CartItem', back_populates='product', cascade='all, delete-orphan')
+    orders = db.relationship('Order', back_populates='product', cascade='all, delete-orphan')
+    
+    def __repr__(self):
+        return f"Product(id={self.id}, name='{self.name}', price={self.price}, rating={self.rating})"
