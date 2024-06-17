@@ -70,7 +70,7 @@ const HomePage = () => {
             Geocel Enterprises Hardware
           </Text>
           <Text fontSize="2xl" color={useColorModeValue('gray.600', 'gray.400')}>
-            Where innovation meets excellence
+            Your partner for quality building materials
           </Text>
           <Text fontSize="xl" color={useColorModeValue('gray.600', 'gray.400')} mt={4}>
             Welcome to Geocel Enterprises Hardware, a leading provider of quality products and services.

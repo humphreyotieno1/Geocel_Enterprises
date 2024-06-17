@@ -22,7 +22,7 @@ const About = () => {
             Company History
           </Heading>
           <Text fontSize="lg">
-            Geocel Enterprises was founded in 1990 by John Doe. Starting as a small family business, it has grown into a leading provider of hardware and construction services in the region. Over the years, Geocel Enterprises has expanded its offerings and built a reputation for quality and reliability.
+            Geocel Enterprises was founded in 2012 by George Ouma. Starting as a small family business, it has grown into a leading provider of hardware and construction services in the region. Over the years, Geocel Enterprises has expanded its offerings and built a reputation for quality and reliability.
           </Text>
         </Box>
 
@@ -58,10 +58,10 @@ const About = () => {
                 borderRadius="full"
                 boxSize="150px"
                 src="/path/to/john_doe.jpg"
-                alt="John Doe"
+                alt="george"
                 mb={4}
               />
-              <Heading as="h3" size="md">John Doe</Heading>
+              <Heading as="h3" size="md">George Ouma</Heading>
               <Text fontSize="lg">Founder & CEO</Text>
             </Box>
             <Box textAlign="center">
@@ -69,22 +69,22 @@ const About = () => {
                 borderRadius="full"
                 boxSize="150px"
                 src="/path/to/jane_doe.jpg"
-                alt="Jane Doe"
+                alt="celestine"
                 mb={4}
               />
-              <Heading as="h3" size="md">Jane Doe</Heading>
-              <Text fontSize="lg">Chief Operating Officer</Text>
+              <Heading as="h3" size="md">Celestine Wagumba</Heading>
+              <Text fontSize="lg">Founder</Text>
             </Box>
             <Box textAlign="center">
               <Image
                 borderRadius="full"
                 boxSize="150px"
                 src="/path/to/richard_roe.jpg"
-                alt="Richard Roe"
+                alt="richard"
                 mb={4}
               />
               <Heading as="h3" size="md">Richard Roe</Heading>
-              <Text fontSize="lg">Chief Financial Officer</Text>
+              <Text fontSize="lg">Manager</Text>
             </Box>
           </SimpleGrid>
         </Box>

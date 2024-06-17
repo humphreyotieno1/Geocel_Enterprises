@@ -26,12 +26,12 @@ const Contact = () => {
           </Heading>
           <HStack mb={4}>
             <Icon as={FaPhone} boxSize={6} />
-            <Text fontSize="lg">+123 456 7890</Text>
+            <Text fontSize="lg">+254 726 588 499</Text>
           </HStack>
           <HStack mb={4}>
             <Icon as={FaEnvelope} boxSize={6} />
-            <Link href="mailto:info@geocel.com" fontSize="lg">
-              info@geocel.com
+            <Link href="mailto:geocelenterprices2020@gmail.com" fontSize="lg">
+              geocelenterprices2020@gmail.com
             </Link>
           </HStack>
           <HStack spacing={4} mb={4}>

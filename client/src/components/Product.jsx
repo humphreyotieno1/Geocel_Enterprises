@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const allProducts = [
   {
-    imageUrl: 'https://shorturl.at/jw8fY',
+    imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718628397/GEOCEL/Bamburi_Fundi.jpg',
     imageAlt: 'Bamburi Fundi Cement',
     quantity: 10,
     price: 760.0,
@@ -15,7 +15,7 @@ const allProducts = [
     numReviews: 10,
   },
   {
-    imageUrl: 'https://shorturl.at/aYfH8',
+    imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718629096/GEOCEL/Steel_Nail_3%22.jpg',
     imageAlt: 'Nails 3 inches',
     quantity: 50,
     price: 250.0,
@@ -26,7 +26,7 @@ const allProducts = [
     numReviews: 30,
   },
   {
-    imageUrl: 'https://shorturl.at/sCE02', // Add a valid image URL
+    imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718627953/GEOCEL/Juakali_wheelbarrow.jpg',
     imageAlt: 'Wheelbarrow',
     quantity: 5,
     price: 2500.0,
@@ -37,7 +37,7 @@ const allProducts = [
     numReviews: 15,
   },
   {
-    imageUrl: 'https://shorturl.at/nrFOT', // Add a valid image URL
+    imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718629200/GEOCEL/Shovel.jpg',
     imageAlt: 'Shovel',
     quantity: 20,
     price: 1200.0,
@@ -48,7 +48,7 @@ const allProducts = [
     numReviews: 25,
   },
   {
-    imageUrl: 'https://shorturl.at/nrFOT', // Add a valid image URL
+    imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718629253/GEOCEL/Hammer.jpg',
     imageAlt: 'Hammer',
     quantity: 15,
     price: 800.0,
@@ -61,7 +61,7 @@ const allProducts = [
   // Add more products as needed
 ];
 
-export default function ProductList() {
+export default function Product() {
   const [visibleProducts, setVisibleProducts] = useState(4);
 
   const handleShowMore = () => {
@@ -73,7 +73,9 @@ export default function ProductList() {
       <Grid templateColumns="repeat(auto-fit, minmax(240px, 1fr))" gap={6}>
         {allProducts.slice(0, visibleProducts).map((product, index) => (
           <Box key={index} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Image src={product.imageUrl} alt={product.imageAlt} />
+            <Box width="100%" height="250px"> {/* Increased height */}
+              <Image src={product.imageUrl} alt={product.imageAlt} width="100%" height="100%" objectFit="cover" />
+            </Box>
             <Box p="6">
               <Box display="flex" alignItems="baseline">
                 <Badge borderRadius="full" px="2" colorScheme="teal">
