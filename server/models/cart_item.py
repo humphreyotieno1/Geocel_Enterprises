@@ -6,13 +6,15 @@ class CartItem(db.Model, SerializerMixin):
     __tablename__ = 'cart_items'
 
     id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer, nullable=False, default=1)
+    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
+    
+    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
     
     # Relationships
     user = db.relationship('User', back_populates='cart_items')

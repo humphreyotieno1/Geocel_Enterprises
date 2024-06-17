@@ -1,34 +1,44 @@
+from flask import Flask
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
+from flask_restful import Api
+from flask_cors import CORS
 
-# from models import CartItem
-# from models import Product
-# from models import Image
-# from models import Category
-from dbconfig import app, api
-from flask_restful import Resource
+#local imports
+from dbconfig import db
+from models.user import User
+from models.product import Product
+from models.category import Category
+from models.cart_item import CartItem
+from models.order import Order
+from models.service import Service
 
 
-# class WelcomeResource(Resource):
-#     def get(self):
-#         return {'message': 'Geocel Enterprises Limited'}
-# api.add_resource(WelcomeResource, '/')
+app = Flask(__name__)
 
-# class ProductResource(Resource):
-#     def get(self):
-#         products = Product.query.all()
-#         result = []
-#         for product in products:
-#             result.append({
-#                 'id': product.id,
-#                 'name': product.name,
-#                 'description': product.description,
-#                 'price': product.price,
-#                 'stock': product.stock,
-#                 'rating': product.rating,
-#                 'imagelink': product.imagelink
-#             })
-#         return result
 
-# api.add_resource(ProductResource, '/products')
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.json.compact = False
 
-if __name__ == '__main__':
-    app.run()
+
+
+
+migrate = Migrate(app, db)
+db.init_app(app)
+
+
+api = Api(app)
+bcrypt = Bcrypt(app)
+
+CORS(app)
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

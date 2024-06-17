@@ -1,19 +1,33 @@
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.orm import validates
+from datetime import datetime
+
 from dbconfig import db
 
-class User(db.Model):
-    __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
-
-    # Relationships
+class User(db.Model, SerializerMixin):
+    __tablename__ = "users"
+    
+    id = db.Column(db.Integer,  primary_key=True)
+    user_name = db.Column(db.String(100), unique=True, nullable=False )
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+    
+    #relationships
     orders = db.relationship('Order', back_populates='user', cascade='all, delete-orphan')
     cart_items = db.relationship('CartItem', back_populates='user', cascade='all, delete-orphan')
     services = db.relationship('Service', back_populates='user', cascade='all, delete-orphan')
 
+    
+    #serialization
+    
     def __repr__(self):
-        return f"User(id={self.id}, name='{self.name}', email='{self.email}')"
+        return f"<username: {self.user_name}>"
+    
+    @validates("email")
+    def validate_email(self, key, email):
+        if "@" not in email:
+            raise ValueError("emailmust contain @")
+        return email
+    

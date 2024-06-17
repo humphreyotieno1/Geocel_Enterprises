@@ -1,14 +1,7 @@
-
 from dbconfig import db
 from sqlalchemy_serializer import SerializerMixin
 
-# from enum import Enum as PyEnum
-# from sqlalchemy import Enum
 
-
-# class View(PyEnum):
-#     IMAGE = 'image'
-#     VIDEO = 'video'
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
@@ -26,8 +19,8 @@ class Product(db.Model, SerializerMixin):
     
     # Relationships
     category = db.relationship('Category', back_populates='category')
-    cart_items = db.relationship('CartItem', back_populates='product', cascade='all, delet-orphan')
-    orders = db.relationship('Order', back_populates='product', cascade='all, delet-orphan')
+    cart_items = db.relationship('CartItem', back_populates='product', cascade='all, delete-orphan')
+    orders = db.relationship('Order', back_populates='product', cascade='all, delete-orphan')
     
     def __repr__(self):
         return f"Product(id={self.id}, name='{self.name}', price={self.price}, rating={self.rating})"

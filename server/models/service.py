@@ -10,9 +10,10 @@ class Service(db.Model, SerializerMixin):
     description = db.Column(db.Text, nullable=True)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     duration = db.Column(db.Integer, nullable=False)  # Duration in minutes
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
+    
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     # Relationships
     user = db.relationship("User", back_populates="services")
