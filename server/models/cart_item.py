@@ -7,8 +7,8 @@ class CartItem(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False, default=1)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -18,9 +18,9 @@ class CartItem(db.Model, SerializerMixin):
     
     # Relationships
     user = db.relationship('User', back_populates='cart_items')
-    service = db.relationship('Service', back_populates='cart_items')
-    order = db.relationship('Order', back_populates='cart_items')
-    product = db.relationship('Order', back_populates='cart_items')
+    services = db.relationship('Service', back_populates='cart_items')
+    orders = db.relationship('Order', back_populates='cart_items')
+    products = db.relationship('Product', back_populates='cart_items')
 
     def __repr__(self):
         return f"CartItem(id={self.id}, user_id={self.user_id}, service_id={self.service_id}, quantity={self.quantity})"

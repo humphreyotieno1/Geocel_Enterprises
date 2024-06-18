@@ -6,13 +6,15 @@ from flask_cors import CORS
 
 #local imports
 from dbconfig import db
+from models.admin import Admin
 from models.user import User
-from models.product import Product
 from models.category import Category
 from models.cart_item import CartItem
-from models.order import Order
-from models.service import Service
 
+from routes.services import Services, ServiceById
+
+from routes.products import Products, ProductById
+from routes.orders import Orders, OrderById
 
 app = Flask(__name__)
 
@@ -34,6 +36,12 @@ bcrypt = Bcrypt(app)
 CORS(app)
 
 
+api.add_resource(Products, '/products')
+api.add_resource(ProductById, '/products/<int:id>')
+api.add_resource(Orders, '/orders')
+api.add_resource(OrderById, '/orders/<int:id>')
+api.add_resource(Services, '/sevices')
+api.add_resource(ServiceById, '/services/<int:id>')
 
 
 

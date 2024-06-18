@@ -11,16 +11,18 @@ class Product(db.Model, SerializerMixin):
     description = db.Column(db.String(500), nullable=True)
     image_url = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False)
+    is_in_stock = db.Column(db.Boolean, nullable=False)
     rating = db.Column(db.Float, nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False, onupdate=db.func.now())
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     
     # Relationships
-    category = db.relationship('Category', back_populates='category')
-    cart_items = db.relationship('CartItem', back_populates='product', cascade='all, delete-orphan')
-    orders = db.relationship('Order', back_populates='product', cascade='all, delete-orphan')
+    category = db.relationship('Category', back_populates='products')
+    admin = db.relationship('Admin', back_populates='products')
+    cart_items = db.relationship('CartItem', back_populates='products', cascade='all, delete-orphan')
+    orders = db.relationship('Order', back_populates='products', cascade='all, delete-orphan')
     
     def __repr__(self):
-        return f"Product(id={self.id}, name='{self.name}', price={self.price}, rating={self.rating})"
+        return f"Product(id={self.id}, name='{self.name}', price={self.price}, Is_in_stock={self.is_in_stock}, rating={self.rating})"
