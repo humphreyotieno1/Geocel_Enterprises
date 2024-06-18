@@ -5,8 +5,8 @@ from datetime import datetime
 from dbconfig import db
 
 
-class User(db.Model, SerializerMixin):
-    __tablename__ = "users"
+class Admin(db.Model, SerializerMixin):
+    __tablename__ = "admins"
     
     id = db.Column(db.Integer,  primary_key=True)
     user_name = db.Column(db.String(100), unique=True, nullable=False )
@@ -15,15 +15,13 @@ class User(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     #relationships
-    orders = db.relationship('Order', back_populates='user', cascade='all, delete-orphan')
-    cart_items = db.relationship('CartItem', back_populates='user', cascade='all, delete-orphan')
-    services = db.relationship('Service', back_populates='user', cascade='all, delete-orphan')
-
+    products = db.relationship('Product', back_populates='admin')
+    
     
     #serialization
     
     def __repr__(self):
-        return f"<username: {self.user_name}>"
+        return f"<Admin: {self.user_name}>"
     
     @validates("email")
     def validate_email(self, key, email):
