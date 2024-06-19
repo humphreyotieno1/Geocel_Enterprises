@@ -7,7 +7,7 @@ from models.service import Service
 class Services(Resource):
     def get(self):
         try:
-            services=[service.to_dict() for service in Service.query.all()]
+            services=[service.to_dict(rules=['-user', '-orders', '-cart_items']) for service in Service.query.all()]
             return make_response(jsonify(services),200)
         except Exception as e:
             return {"message": "Error retrieving services", "error": str(e)}, 500
