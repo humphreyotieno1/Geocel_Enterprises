@@ -1,18 +1,19 @@
-from sqlalchemy.orm import relationship
-from .dbconfig import db
-from datetime import datetime
+from sqlalchemy_serializer import SerializerMixin
+from dbconfig import db
 
-class Category(db.Model):
+
+class Category(db.Model, SerializerMixin):
     __tablename__ = 'categories'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.String(500), nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    
 
     # Relationship with Product model
-    products = relationship('Product', backref='category')
+    products = db.relationship('Product', back_populates='category')
 
     def __repr__(self):
         return f"Category(id={self.id}, name='{self.name}', description='{self.description}')"
