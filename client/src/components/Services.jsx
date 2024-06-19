@@ -1,18 +1,4 @@
 import React from 'react';
-import {
-  Box,
-  Heading,
-  Text,
-  VStack,
-  SimpleGrid,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  useToast,
-  Badge
-} from '@chakra-ui/react';
 
 const services = [
   {
@@ -46,77 +32,60 @@ const services = [
 ];
 
 const ServiceRequestForm = () => {
-  const toast = useToast();
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // Implement form submission logic
-    toast({
-      title: "Request submitted.",
-      description: "We have received your service request.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
+    alert("Request submitted. We have received your service request.");
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit}
-      bg="white"
-      p={6}
-      borderRadius="md"
-      boxShadow="lg"
-    >
-      <VStack spacing={4}>
-        <FormControl id="name" isRequired>
-          <FormLabel>Name</FormLabel>
-          <Input type="text" placeholder="Your name" />
-        </FormControl>
-        <FormControl id="email" isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input type="email" placeholder="Your email" />
-        </FormControl>
-        <FormControl id="service" isRequired>
-          <FormLabel>Service</FormLabel>
-          <Input type="text" placeholder="Service you need" />
-        </FormControl>
-        <FormControl id="details" isRequired>
-          <FormLabel>Details</FormLabel>
-          <Textarea placeholder="Describe your request in detail" />
-        </FormControl>
-        <Button type="submit" colorScheme="blue" width="full">
-          Submit Request
-        </Button>
-      </VStack>
-    </Box>
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-lg">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="name" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="service" className="block text-sm font-medium text-gray-700">Service</label>
+        <input type="text" id="service" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="details" className="block text-sm font-medium text-gray-700">Additional Details</label>
+        <textarea id="details" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+      </div>
+      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        Submit Request
+      </button>
+    </form>
   );
 };
 
 const Services = () => {
   return (
-    <Box p={6}>
-      <Heading as="h1" mb={6}>
-        Our Services
-      </Heading>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} mb={10}>
+    <div className="p-4 bg-gray-100 min-h-screen">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold">Our Services</h1>
+        <p className="text-lg">We offer a range of services to meet your needs.</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {services.map((service) => (
-          <Box key={service.id} p={5} shadow="md" borderWidth="1px" borderRadius="md">
-            <Heading fontSize="xl">{service.name}</Heading>
-            <Text mt={4}>{service.description}</Text>
-            <Text mt={2} fontWeight="bold">Price: {service.price}</Text>
-            <Badge mt={2} colorScheme={service.availability === 'Available' ? 'green' : 'orange'}>
+          <div key={service.id} className="bg-white p-4 rounded-md shadow-md">
+            <h3 className="text-xl font-bold">{service.name}</h3>
+            <p className="mt-2">{service.description}</p>
+            <p className="mt-2 font-bold">{service.price}</p>
+            <span className={`mt-2 inline-block px-2 py-1 rounded text-white ${service.availability === 'Available' ? 'bg-green-500' : 'bg-red-500'}`}>
               {service.availability}
-            </Badge>
-          </Box>
+            </span>
+          </div>
         ))}
-      </SimpleGrid>
-      <Heading as="h2" size="lg" mb={4}>
-        Request a Service
-      </Heading>
-      <ServiceRequestForm />
-    </Box>
+      </div>
+      <div className="mt-8">
+        <ServiceRequestForm />
+      </div>
+    </div>
   );
 };
 

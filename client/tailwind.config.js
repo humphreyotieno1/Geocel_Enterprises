@@ -1,16 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+    darkMode: 'class', // Add this line
     content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}"
+      "./src/**/*.{js,jsx,ts,tsx}",
     ],
     theme: {
-        extend: {
-            fontFamily: {
-                montserrat: ['Montserrat', 'sans-serif'],
-                raleway: ['Raleway', 'sans-serif']
-            }
-        },
+      extend: {},
     },
     plugins: [],
-}
+  }
+  

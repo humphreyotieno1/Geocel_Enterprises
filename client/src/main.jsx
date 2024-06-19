@@ -1,14 +1,13 @@
 import React from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
+import { CartProvider } from './components/CartContext.jsx';
 
-const rootElement = document.getElementById('root');
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <CartProvider>
       <App />
-    </ChakraProvider>
+    </CartProvider>
   </React.StrictMode>
 );

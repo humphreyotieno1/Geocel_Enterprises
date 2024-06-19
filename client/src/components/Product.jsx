@@ -1,7 +1,9 @@
-import { Box, Image, Badge, Grid, Button } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../components/CartContext.jsx';
+import Cart from './Cart.jsx';
 
-const allProducts = [
+// Sample product data
+const initialProducts = [
   {
     imageUrl: 'https://res.cloudinary.com/drdradtyj/image/upload/v1718628397/GEOCEL/Bamburi_Fundi.jpg',
     imageAlt: 'Bamburi Fundi Cement',
@@ -58,57 +60,89 @@ const allProducts = [
     rating: 4.7,
     numReviews: 22,
   },
-  // Add more products as needed
 ];
 
-export default function Product() {
-  const [visibleProducts, setVisibleProducts] = useState(4);
+export default function Products() {
+  const [showModal, setShowModal] = useState(false);
+  const [products, setProducts] = useState(initialProducts); // Use initialProducts here
+  const { cartItems, addToCart } = useContext(CartContext);
 
-  const handleShowMore = () => {
-    setVisibleProducts(prevVisibleProducts => prevVisibleProducts + 4);
+  const toggle = () => {
+    setShowModal(!showModal);
   };
 
+  // Use useEffect to fetch products from an API
+  useEffect(() => {
+    // If fetching from an API, you would use the fetch method here
+    // async function getProducts() {
+    //   try {
+    //     const response = await fetch('https://your-api-endpoint/products');
+    //     if (!response.ok) {
+    //       throw new Error('Failed to fetch products');
+    //     }
+    //     const data = await response.json();
+    //     setProducts(data.products);
+    //   } catch (error) {
+    //     console.error('Error fetching products:', error.message);
+    //   }
+    // }
+    // getProducts();
+
+    // For demonstration, using initialProducts directly
+    // setProducts(initialProducts);
+  }, []);
+
   return (
-    <Box p={6}>
-      <Grid templateColumns="repeat(auto-fit, minmax(240px, 1fr))" gap={6}>
-        {allProducts.slice(0, visibleProducts).map((product, index) => (
-          <Box key={index} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Box width="100%" height="250px"> {/* Increased height */}
-              <Image src={product.imageUrl} alt={product.imageAlt} width="100%" height="100%" objectFit="cover" />
-            </Box>
-            <Box p="6">
-              <Box display="flex" alignItems="baseline">
-                <Badge borderRadius="full" px="2" colorScheme="teal">
-                  {product.formattedPrice}
-                </Badge>
-                <Box
-                  color="gray.500"
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  fontSize="xs"
-                  textTransform="uppercase"
-                  ml="2"
+    <div className="flex flex-col justify-center bg-gray-100 min-h-screen">
+      <div className="flex justify-between items-center px-20 py-5">
+        <h1 className="text-2xl uppercase font-bold mt-10 text-center mb-10">Shop</h1>
+        {!showModal && (
+          <button
+            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
+            onClick={toggle}
+          >
+            Cart ({cartItems.length})
+          </button>
+        )}
+      </div>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
+        {products.map((product, index) => (
+          <div key={index} className="bg-white shadow-md rounded-lg p-6 sm:p-10">
+            <img src={product.imageUrl} alt={product.imageAlt} className="rounded-md h-48 object-cover w-full" />
+            <div className="mt-4">
+              <h1 className="text-lg uppercase font-bold">{product.name}</h1>
+              <p className="mt-2 text-gray-600 text-sm">{product.description.slice(0, 40)}...</p>
+              <p className="mt-2 text-gray-600">{product.formattedPrice}</p>
+            </div>
+            <div className="mt-6 flex justify-between items-center">
+              <button
+                className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
+                onClick={() => {
+                  addToCart(product);
+                }}
+              >
+                Add to cart
+              </button>
+              <div className="flex items-center">
+                <span className="text-gray-700 mr-1">{product.rating}</span>
+                <svg
+                  className="w-4 h-4 fill-current text-yellow-500"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  {product.quantity} available
-                </Box>
-              </Box>
-              <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-                {product.name}
-              </Box>
-              <Box mt="1" letterSpacing="wide" fontSize="sm" lineHeight="tight">
-                {product.description}
-              </Box>
-            </Box>
-          </Box>
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M10 1.67l2.72 5.51h6.56l-4.76 4.63 1.13 6.57-5.63-3-5.63 3 1.13-6.57-4.76-4.63h6.56l2.72-5.51z"
+                  />
+                </svg>
+                <span className="text-gray-700 ml-1">({product.numReviews})</span>
+              </div>
+            </div>
+          </div>
         ))}
-      </Grid>
-      {visibleProducts < allProducts.length && (
-        <Box textAlign="center" mt={6}>
-          <Button onClick={handleShowMore} colorScheme="blue">
-            Show More
-          </Button>
-        </Box>
-      )}
-    </Box>
+      </div>
+      <Cart showModal={showModal} toggle={toggle} />
+    </div>
   );
 }
