@@ -7,7 +7,7 @@ from models.order import Order
 class Orders(Resource):
     def get(self):
         try:
-            orders=[order.to_dict() for order in Order.query.all()]
+            orders=[order.to_dict(rules=['-user', '-products', '-services', '-cart_items']) for order in Order.query.all()]
             return make_response(jsonify(orders),200)
         except Exception as e:
             return {"message": "Error retrieving orders", "error": str(e)}, 500
@@ -47,8 +47,6 @@ class OrderById(Resource):
         db.session.delete(order)
         db.session.commit()
         
-        message = {"message": "order deleted successfully"}
-        
-        return make_response(message, 200)   
+        return make_response({"message": "order deleted successfully"}, 200)   
     
     

@@ -84,8 +84,7 @@ class ProductById(Resource):
         db.session.delete(product)
         db.session.commit()
         
-        message = {"message": "product deleted successfully"}
         
-        return make_response(message, 200)   
+        return make_response({"message": "product deleted successfully"}, 200)   
     
     

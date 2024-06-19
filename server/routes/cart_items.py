@@ -7,7 +7,7 @@ from models.cart_item import CartItem
 class CartItems(Resource):
     def get(self):
         try:
-            cartitems=[cartitem.to_dict() for cartitem in CartItem.query.all()]
+            cartitems=[cartitem.to_dict(rules=['-user','-services', '-orders', '-products']) for cartitem in CartItem.query.all()]
             return make_response(jsonify(cartitems),200)
         except Exception as e:
             return {"message": "Error retrieving cartitems", "error": str(e)}, 500
@@ -46,8 +46,6 @@ class CartItemById(Resource):
         db.session.delete(cartitem)
         db.session.commit()
         
-        message = {"message": "cartitem deleted successfully"}
-        
-        return make_response(message, 200)   
+        return make_response({"message": "cartitem deleted successfully"}, 200)   
     
     
