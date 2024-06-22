@@ -4,7 +4,7 @@ import {
   Heading,
   Text,
   VStack,
-  SimpleGrid,
+  Flex,
   Image,
   Divider,
 } from '@chakra-ui/react';
@@ -17,90 +17,135 @@ const About = () => {
     visible: { opacity: 1, scale: 1 },
   };
 
+  const coreValues = [
+    { title: 'Integrity', description: 'We conduct our business with the highest standards of professionalism and ethical behavior.', image: '/integrity.jpg' },
+    { title: 'Quality', description: 'We are committed to providing top-quality products and services to our customers.', image: '/quality.jpg' },
+    { title: 'Customer Focus', description: 'Our customers are at the center of everything we do.', image: '/customer_service.jpg' },
+    { title: 'Innovation', description: 'We continuously seek new ways to improve our products and services.', image: '/inn.jpg' },
+  ];
+
   return (
     <Box p={6}>
-      <Heading as="h1" mb={6} fontWeight="bold" fontSize="3xl">
+      <Heading as="h1" mb={6} fontWeight="bold" fontSize={{ base: '2xl', md: '3xl' }}>
         About Us
       </Heading>
 
-      <VStack spacing={10} align="start">
-        <Box>
-          <Heading as="h2" mb={4} fontWeight="bold" fontSize="2xl">
+      <VStack spacing={10} align="start" w="full">
+        <Box w="full">
+          <Heading as="h2" mb={4} fontWeight="bold" fontSize={{ base: 'xl', md: '2xl' }}>
             Company History
           </Heading>
-          <Text fontSize="lg">
+          <Text fontSize={{ base: 'md', md: 'lg' }}>
             Geocel Enterprises was founded in 2012 by George Ouma. Starting as a small family business, it has grown into a leading provider of hardware and construction services in the region. Over the years, Geocel Enterprises has expanded its offerings and built a reputation for quality and reliability.
           </Text>
         </Box>
 
         <Divider />
 
-        <Box>
-          <Heading as="h2" mb={4} fontWeight="bold" fontSize="2xl">
+        <Box w="full">
+          <Heading as="h2" mb={4} fontWeight="bold" fontSize={{ base: 'xl', md: '2xl' }}>
             Core Values
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            {[
-              { title: 'Integrity', description: 'We conduct our business with the highest standards of professionalism and ethical behavior.' },
-              { title: 'Quality', description: 'We are committed to providing top-quality products and services to our customers.' },
-              { title: 'Customer Focus', description: 'Our customers are at the center of everything we do.' },
-              { title: 'Innovation', description: 'We continuously seek new ways to improve our products and services.' },
-            ].map((value, index) => (
-              <motion.div key={index} variants={cardVariants} initial="hidden" animate="visible" transition={{ duration: 0.5, delay: index * 0.2 }}>
-                <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={6} boxShadow="md" _hover={{ boxShadow: "xl" }}>
-                  <Heading as="h3" size="md" mb={2}>{value.title}</Heading>
-                  <Text fontSize="lg">{value.description}</Text>
+          <Flex wrap="wrap" justify="space-between">
+            {coreValues.map((value, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                style={{ flex: '1 0 45%', margin: '10px' }}
+              >
+                <Box maxW="full" bg="white" rounded="xl" shadow="md" overflow="hidden" _hover={{ boxShadow: 'xl' }}>
+                  <Flex direction={{ base: 'column', md: 'row' }}>
+                    <Box flexShrink="0">
+                      <Image boxSize="200px" objectFit="cover" src={value.image} alt={value.title} />
+                    </Box>
+                    <Box p={8}>
+                      <Text className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{value.title}</Text>
+                      <Text className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{value.title}</Text>
+                      <Text className="mt-2 text-slate-500">{value.description}</Text>
+                    </Box>
+                  </Flex>
                 </Box>
               </motion.div>
             ))}
-          </SimpleGrid>
+          </Flex>
         </Box>
 
         <Divider />
 
-        <Box>
-          <Heading as="h2" mb={4} fontWeight="bold" fontSize="2xl">
+        <Box w="full">
+          <Heading as="h2" mb={4} fontWeight="bold" fontSize={{ base: 'xl', md: '2xl' }}>
             Leadership Team
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+          <Flex wrap="wrap" justify="space-between">
             {[
               { name: 'George Ouma', role: 'Founder & CEO', image: '/path/to/john_doe.jpg', alt: 'george' },
               { name: 'Celestine Wagumba', role: 'Founder', image: '/path/to/jane_doe.jpg', alt: 'celestine' },
               { name: 'Richard Roe', role: 'Manager', image: '/path/to/richard_roe.jpg', alt: 'richard' },
             ].map((leader, index) => (
-              <motion.div key={index} variants={cardVariants} initial="hidden" animate="visible" transition={{ duration: 0.5, delay: index * 0.2 }}>
-                <Box textAlign="center" borderWidth="1px" borderRadius="lg" overflow="hidden" p={6} boxShadow="md" _hover={{ boxShadow: "xl" }}>
-                  <Image borderRadius="full" boxSize="150px" src={leader.image} alt={leader.alt} mb={4} />
-                  <Heading as="h3" size="md">{leader.name}</Heading>
-                  <Text fontSize="lg">{leader.role}</Text>
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                style={{ flex: '1 0 30%', margin: '10px' }}
+              >
+                <Box maxW="full" bg="white" rounded="xl" shadow="md" overflow="hidden" _hover={{ boxShadow: 'xl' }}>
+                  <Flex direction={{ base: 'column', md: 'row' }}>
+                    <Box flexShrink="0">
+                      <Image boxSize="200px" objectFit="cover" src={leader.image} alt={leader.alt} />
+                    </Box>
+                    <Box p={8} textAlign="center">
+                      <Text className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{leader.role}</Text>
+                      <Text className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{leader.name}</Text>
+                      <Text className="mt-2 text-slate-500">{leader.role}</Text>
+                    </Box>
+                  </Flex>
                 </Box>
               </motion.div>
             ))}
-          </SimpleGrid>
+          </Flex>
         </Box>
 
         <Divider />
 
-        <Box>
-          <Heading as="h2" mb={4} fontWeight="bold" fontSize="2xl">
+        <Box w="full">
+          <Heading as="h2" mb={4} fontWeight="bold" fontSize={{ base: 'xl', md: '2xl' }}>
             Achievements and Milestones
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+          <Flex wrap="wrap" justify="space-between">
             {[
               { year: '1990', achievement: 'Geocel Enterprises was founded.' },
               { year: '2000', achievement: 'Expanded to a second location.' },
               { year: '2010', achievement: 'Reached $10 million in annual revenue.' },
               { year: '2020', achievement: 'Awarded "Best Hardware Supplier" in the region.' },
             ].map((milestone, index) => (
-              <motion.div key={index} variants={cardVariants} initial="hidden" animate="visible" transition={{ duration: 0.5, delay: index * 0.2 }}>
-                <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={6} boxShadow="md" _hover={{ boxShadow: "xl" }}>
-                  <Text fontSize="lg" mb={2}>
-                    <strong>{milestone.year}:</strong> {milestone.achievement}
-                  </Text>
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                style={{ flex: '1 0 45%', margin: '10px' }}
+              >
+                <Box maxW="full" bg="white" rounded="xl" shadow="md" overflow="hidden" _hover={{ boxShadow: 'xl' }}>
+                  <Flex direction={{ base: 'column', md: 'row' }}>
+                    <Box flexShrink="0">
+                      <Image boxSize="200px" objectFit="cover" src="/img/building.jpg" alt="Modern building architecture" />
+                    </Box>
+                    <Box p={8}>
+                      <Text className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{milestone.year}</Text>
+                      <Text className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{milestone.year}</Text>
+                      <Text className="mt-2 text-slate-500">{milestone.achievement}</Text>
+                    </Box>
+                  </Flex>
                 </Box>
               </motion.div>
             ))}
-          </SimpleGrid>
+          </Flex>
         </Box>
       </VStack>
     </Box>
