@@ -9,6 +9,24 @@ const Cart = ({ showModal, toggle }) => {
     alert("Proceeding to checkout...");
   };
 
+  // Function to calculate total price
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+  };
+
+  // Function to count unique items in the cart
+  const countItems = () => {
+    const itemCounts = {};
+    cartItems.forEach(item => {
+      if (itemCounts[item.id]) {
+        itemCounts[item.id].quantity += item.quantity;
+      } else {
+        itemCounts[item.id] = { ...item };
+      }
+    });
+    return Object.values(itemCounts);
+  };
+
   return (
     <AnimatePresence>
       {showModal && (
@@ -31,34 +49,42 @@ const Cart = ({ showModal, toggle }) => {
               <p className="text-gray-600">Your cart is empty</p>
             ) : (
               <div>
-                {cartItems.map((item, index) => (
+                {countItems().map((item, index) => (
                   <div key={index} className="flex items-center justify-between mb-4">
-                    <img src={item.thumbnail} alt={item.title} className="w-12 h-12 sm:w-16 sm:h-16 rounded" />
+                    <img src={item.imageUrl} alt={item.name} className="w-12 h-12 sm:w-16 sm:h-16 rounded" />
                     <div className="flex-1 ml-2 sm:ml-4">
-                      <h3 className="text-sm sm:text-lg font-bold">{item.title}</h3>
-                      <p className="text-gray-600 text-sm">${item.price}</p>
+                      <h3 className="text-sm sm:text-lg font-bold">{item.name}</h3>
+                      <p className="text-gray-600 text-sm">{item.formattedPrice} x {item.quantity}</p>
                     </div>
-                    <button
-                      className="px-2 py-1 bg-red-500 text-white text-xs sm:text-sm rounded hover:bg-red-600"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      Remove
-                    </button>
+                    <div className="flex items-center">
+                      <button
+                        className="px-2 py-1 bg-red-500 text-white text-xs sm:text-sm rounded hover:bg-red-600"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 ))}
-                <div className="mt-4 flex flex-col sm:flex-row">
-                  <button
-                    className="px-3 py-2 bg-green-500 text-white text-sm sm:text-base rounded hover:bg-green-600 mb-2 sm:mb-0 sm:mr-2"
-                    onClick={handleCheckout}
-                  >
-                    Checkout
-                  </button>
-                  <button
-                    className="px-3 py-2 bg-gray-500 text-white text-sm sm:text-base rounded hover:bg-gray-600"
-                    onClick={clearCart}
-                  >
-                    Clear Cart
-                  </button>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <p className="text-lg font-semibold">Total:</p>
+                    <p className="text-gray-700">kshs {calculateTotal()}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <button
+                      className="px-3 py-2 bg-green-500 text-white text-sm sm:text-base rounded hover:bg-green-600 mb-2"
+                      onClick={handleCheckout}
+                    >
+                      Checkout
+                    </button>
+                    <button
+                      className="px-3 py-2 bg-gray-500 text-white text-sm sm:text-base rounded hover:bg-gray-600"
+                      onClick={clearCart}
+                    >
+                      Clear Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

@@ -1,17 +1,8 @@
 import React from 'react';
-import {
-  Box,
-  Heading,
-  Text,
-  VStack,
-  Flex,
-  Image,
-  Divider,
-} from '@chakra-ui/react';
-import { motion } from 'framer-motion'; // Import motion component for animations
+import { Box, Heading, Text, VStack, Flex, Image, Divider } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
 const About = () => {
-  // Animation settings for cards
   const cardVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
@@ -24,8 +15,14 @@ const About = () => {
     { title: 'Innovation', description: 'We continuously seek new ways to improve our products and services.', image: '/inn.jpg' },
   ];
 
+  const leadershipTeam = [
+    { name: 'George Ouma', role: 'Founder & CEO', image: '/path/to/john_doe.jpg', alt: 'George Ouma' },
+    { name: 'Celestine Wagumba', role: 'Founder', image: '/path/to/jane_doe.jpg', alt: 'Celestine Wagumba' },
+    { name: 'Richard Roe', role: 'Manager', image: '/path/to/richard_roe.jpg', alt: 'Richard Roe' },
+  ];
+
   return (
-    <Box p={6}>
+    <Box p={6} id="about">
       <Heading as="h1" mb={6} fontWeight="bold" fontSize={{ base: '2xl', md: '3xl' }}>
         About Us
       </Heading>
@@ -80,11 +77,7 @@ const About = () => {
             Leadership Team
           </Heading>
           <Flex wrap="wrap" justify="space-between">
-            {[
-              { name: 'George Ouma', role: 'Founder & CEO', image: '/path/to/john_doe.jpg', alt: 'george' },
-              { name: 'Celestine Wagumba', role: 'Founder', image: '/path/to/jane_doe.jpg', alt: 'celestine' },
-              { name: 'Richard Roe', role: 'Manager', image: '/path/to/richard_roe.jpg', alt: 'richard' },
-            ].map((leader, index) => (
+            {leadershipTeam.map((leader, index) => (
               <motion.div
                 key={index}
                 variants={cardVariants}
