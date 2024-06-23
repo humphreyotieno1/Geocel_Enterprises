@@ -223,7 +223,6 @@ export default function Products({ searchQuery }) {
 
   const totalPages = Math.ceil(searchedProducts.length / itemsPerPage);
   const paginatedProducts = searchedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  
 
   const openQuickView = (product) => {
     setSelectedProduct(product);
@@ -252,15 +251,17 @@ export default function Products({ searchQuery }) {
           <option value="Plumbing">Plumbing</option>
           <option value="Welding">Welding</option>
         </select>
-        <button
-          className="w-full px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 mt-4"
-          onClick={toggleCart}
-        >
-          Cart ({cartItems.length})
-        </button>
       </div>
       <div className="md:w-3/4 p-4 sm:px-10 lg:px-20">
-        <h1 className="text-2xl uppercase font-bold mt-10 text-center mb-10">Shop</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl uppercase font-bold mt-10 mb-10">Shop</h1>
+          <button
+            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
+            onClick={toggleCart}
+          >
+            Cart ({cartItems.length})
+          </button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {paginatedProducts.map((product, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg p-4 sm:p-6 relative group">
