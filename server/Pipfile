@@ -13,6 +13,8 @@ flask-restful = "*"
 sqlalchemy = "*"
 sqlalchemy-serializer = "*"
 faker = "*"
+pandas = "*"
+openpyxl = "*"
 
 [dev-packages]
 
