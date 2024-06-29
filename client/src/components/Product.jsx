@@ -216,7 +216,7 @@ export default function Products({ searchQuery }) {
   const filteredProducts = selectedCategory === 'All'
     ? products
     : products.filter(product => product.category === selectedCategory);
-  
+
   const searchedProducts = searchQuery
     ? filteredProducts.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : filteredProducts;
@@ -267,42 +267,21 @@ export default function Products({ searchQuery }) {
             <div key={index} className="bg-white shadow-md rounded-lg p-4 sm:p-6 relative group">
               <img src={product.imageUrl} alt={product.imageAlt} className="rounded-md h-48 object-cover w-full" />
               <div className="mt-4">
-                <h1 className="text-lg uppercase font-bold">{product.name}</h1>
-                <p className="mt-2 text-gray-600 text-sm">{product.description.slice(0, 40)}...</p>
-                <p className="mt-2 text-gray-600">{product.formattedPrice}</p>
-                <span className="block mt-2 text-sm text-gray-500">{product.category}</span>
+                <h1 className="font-bold text-sm sm:text-base">{product.name}</h1>
+                <p className="text-gray-700 text-xs sm:text-sm">{product.formattedPrice}</p>
               </div>
-              <div className="mt-6 flex justify-between items-center">
+              <div className="mt-4 flex justify-between items-center">
                 <button
-                  className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
-                  onClick={() => {
-                    addToCart(product);
-                  }}
-                >
-                  Add to cart
-                </button>
-                <div className="flex items-center">
-                  <span className="text-gray-700 mr-1">{product.rating}</span>
-                  <svg
-                    className="w-4 h-4 fill-current text-yellow-500"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M10 1.67l2.72 5.51h6.56l-4.76 4.63 1.13 6.57-5.63-3-5.63 3 1.13-6.57-4.76-4.63h6.56l2.72-5.51z"
-                    />
-                  </svg>
-                  <span className="text-gray-700 ml-1">({product.numReviews})</span>
-                </div>
-              </div>
-              <div className="absolute bottom-4 right-4">
-                <button
-                  className="px-4 py-2 bg-white text-gray-800 text-xs font-bold uppercase rounded shadow-md group-hover:visible invisible"
                   onClick={() => openQuickView(product)}
+                  className="px-2 py-1 sm:px-4 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
                 >
                   Quick View
+                </button>
+                <button
+                  onClick={() => addToCart(product)}
+                  className="px-2 py-1 sm:px-4 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
+                >
+                  Add to Cart
                 </button>
               </div>
             </div>
@@ -313,42 +292,50 @@ export default function Products({ searchQuery }) {
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
-        <Cart showModal={showModal} toggle={toggleCart} />
-
-        <AnimatePresence>
-          {selectedProduct && (
-            <motion.div
-              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeQuickView}
-            >
-              <motion.div
-                className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full"
-                initial={{ y: -50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -50, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <h2 className="text-2xl font-bold mb-4">{selectedProduct.name}</h2>
-                <img src={selectedProduct.imageUrl} alt={selectedProduct.imageAlt} className="w-full h-auto rounded-md" />
-                <p className="mt-4">{selectedProduct.description}</p>
-                <p className="mt-2 text-gray-600">{selectedProduct.formattedPrice}</p>
-                <p className="mt-2 text-gray-600">Category: {selectedProduct.category}</p>
-                <div className="mt-4 flex justify-end">
-                  <button
-                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
-                    onClick={closeQuickView}
-                  >
-                    Close
-                  </button>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+      <Cart showModal={showModal} toggle={toggleCart} />
+      <AnimatePresence>
+        {selectedProduct && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeQuickView}
+          >
+            <motion.div
+              className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4"
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -50, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl sm:text-2xl font-bold mb-4">Quick View</h2>
+              <img src={selectedProduct.imageUrl} alt={selectedProduct.imageAlt} className="rounded-md h-48 object-cover w-full mb-4" />
+              <h3 className="text-lg font-bold">{selectedProduct.name}</h3>
+              <p className="text-gray-700">{selectedProduct.formattedPrice}</p>
+              <p className="mt-2 text-sm sm:text-base">{selectedProduct.description}</p>
+              <div className="mt-4 flex justify-between items-center">
+                <button
+                  onClick={() => {
+                    addToCart(selectedProduct);
+                    closeQuickView();
+                  }}
+                  className="px-3 py-2 bg-gray-800 text-white text-sm font-semibold rounded hover:bg-gray-700"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  onClick={closeQuickView}
+                  className="px-3 py-2 bg-gray-200 text-gray-700 text-sm font-semibold rounded hover:bg-gray-300"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
