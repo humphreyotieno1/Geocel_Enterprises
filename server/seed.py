@@ -60,3 +60,28 @@ with app.app_context():
     db.session.add_all([product1, category1, admin, user1, order1, service1, cart_item1])
     
     db.session.commit()
+
+
+from app import db, Product
+
+db.create_all()
+
+products = [
+    Product(
+        name='Bamburi Fundi Cement',
+        imageUrl='https://res.cloudinary.com/drdradtyj/image/upload/v1718628397/GEOCEL/Bamburi_Fundi.jpg',
+        imageAlt='Bamburi Fundi Cement',
+        category='Construction',
+        quantity=10,
+        price=760.0,
+        description='Bamburi Fundi Cement is a hydraulic cement designed for use in mortars for masonry construction. Plastering, rendering, stucco, brick laying, screeding and others.',
+        formattedPrice='kshs 760.00',
+        rating=4,
+        numReviews=10
+    ),
+    # Add more products here
+]
+
+db.session.bulk_save_objects(products)
+db.session.commit()
+print("Database seeded!")
