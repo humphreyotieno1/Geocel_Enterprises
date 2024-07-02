@@ -13,7 +13,7 @@ class Category(db.Model, SerializerMixin):
     
 
     # Relationship with Product model
-    products = db.relationship('Product', back_populates='category', lazy='dynamic')
+    products = db.relationship('Product', back_populates='category')
 
     def __repr__(self):
         return f"Category(id={self.id}, name='{self.name}', description='{self.description}')"
