@@ -152,7 +152,6 @@ with app.app_context():
             {"name": "Construction", "description": "jenga nchi"},
             {"name": "Timber", "description": "miti shamba"},
             {"name": "Plumbing", "description": "njia za maji"},
-            {"name": "Services", "description": "kazi kwetu"},
             {"name": "welding", "description": "chomelea"},
             {"name": "Fencing", "description": "seng'enge ni ng'ombe"},
             {"name": "Paint", "description": "Peter marangi"},
@@ -182,7 +181,7 @@ with app.app_context():
             db.session.add(admin)
 
     try:
-        seed_products_from_excel('./GeocelProductsDB.xlsx')
+        seed_products_from_excel('./GeocelProductsDBLatest.xlsx')
         seed_categories()
         seed_cart_items()
         seed_orders()
