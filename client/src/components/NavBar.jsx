@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
-export default function NavBar({ setSearchQuery }) {
+export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -36,7 +37,7 @@ export default function NavBar({ setSearchQuery }) {
           <Link to="/contact" className="mx-4">Contact</Link>
         </div>
 
-        <form onSubmit={handleSearchSubmit} className="hidden md:flex">
+        <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
           <input
             type="text"
             value={query}
@@ -48,6 +49,20 @@ export default function NavBar({ setSearchQuery }) {
             Search
           </button>
         </form>
+
+        <div className="hidden md:flex items-center ml-4">
+          {loggedIn ? (
+            <Button onClick={onLogout} colorScheme="blue">
+              Logout
+            </Button>
+          ) : (
+            <Link to="/login">
+              <Button colorScheme="blue">
+                Login
+              </Button>
+            </Link>
+          )}
+        </div>
 
         <button className="md:hidden flex items-center" onClick={toggleDropdown}>
           ☰
@@ -73,6 +88,19 @@ export default function NavBar({ setSearchQuery }) {
               Search
             </button>
           </form>
+          <div className="px-4 py-2">
+            {loggedIn ? (
+              <Button onClick={onLogout} colorScheme="blue" className="w-full">
+                Logout
+              </Button>
+            ) : (
+              <Link to="/login">
+                <Button colorScheme="blue" className="w-full">
+                  Login
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </div>
