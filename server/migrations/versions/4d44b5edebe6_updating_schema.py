@@ -1,8 +1,8 @@
-"""edit service model
+"""Updating schema
 
-Revision ID: 9135dacdc1cc
+Revision ID: 4d44b5edebe6
 Revises: 
-Create Date: 2024-06-28 17:50:43.779831
+Create Date: 2024-07-03 12:55:19.306518
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9135dacdc1cc'
+revision = '4d44b5edebe6'
 down_revision = None
 branch_labels = None
 depends_on = None
