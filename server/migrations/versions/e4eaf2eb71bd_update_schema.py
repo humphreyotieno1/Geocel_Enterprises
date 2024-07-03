@@ -1,8 +1,8 @@
-"""edit service model
+"""update schema
 
-Revision ID: 9135dacdc1cc
+Revision ID: e4eaf2eb71bd
 Revises: 
-Create Date: 2024-06-28 17:50:43.779831
+Create Date: 2024-07-03 18:22:26.454455
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9135dacdc1cc'
+revision = 'e4eaf2eb71bd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,6 +41,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_name', sa.String(length=100), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('password_hash', sa.String(length=128), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),

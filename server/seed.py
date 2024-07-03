@@ -1,4 +1,5 @@
 import pandas as pd
+from werkzeug.security import generate_password_hash
 
 from dbconfig import db
 from app import app
@@ -168,7 +169,8 @@ with app.app_context():
         pass
 
     print("seeding users...")
-    user1 = User(user_name="Eiva", email="eiva@gmail.com")
+    user1 = User(user_name="Testuser", email="testuser@gmail.com")
+    user1.set_password("E#12345678e")
     db.session.add(user1)
 
     print("seeding admins...")
