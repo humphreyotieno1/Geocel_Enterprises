@@ -181,7 +181,7 @@ with app.app_context():
             db.session.add(admin)
 
     try:
-        seed_products_from_excel('./GeocelProductsDBLatest.xlsx')
+        seed_products_from_excel('./GeocelProductsDBupdated.xlsx')
         seed_categories()
         seed_cart_items()
         seed_orders()
