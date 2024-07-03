@@ -30,7 +30,7 @@ const Login = ({ onLogin }) => {
           localStorage.setItem("access_token", data.access_token);
           setMessage("Login successful!");
           setPassword("");
-          setEmail("");
+          setUsername("");
           onLogin(data.access_token);
         } else throw new Error("Token not found in response");
       })
