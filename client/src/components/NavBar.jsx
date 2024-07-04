@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
+import { IoMdContact } from 'react-icons/io';
 
 export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,15 +51,15 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           </button>
         </form>
 
-        <div className="hidden md:flex items-center ml-4">
+        <div className="hidden md:flex items-center ml-8" >
           {loggedIn ? (
-            <Button onClick={onLogout} colorScheme="blue">
+            <Button onClick={onLogout} colorScheme="blue" leftIcon={<IoMdContact />} className="flex items-center space-x-1 rounded hover:bg-gray-600">
               Logout
             </Button>
           ) : (
             <Link to="/login">
-              <Button colorScheme="blue">
-                Login
+              <Button colorScheme="blue" leftIcon={<IoMdContact />} className="flex items-center space-x-1 rounded hover:bg-gray-600">
+                <span>Login</span>
               </Button>
             </Link>
           )}
