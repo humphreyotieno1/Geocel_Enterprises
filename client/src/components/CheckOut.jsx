@@ -17,6 +17,38 @@ const CheckOut = () => {
 
     const [expirationDate, setExpirationDate] = useState(null);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
+    const handleMpesaPayment = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        setSuccess(null);
+
+        try {
+            const response = await fetch('/api/mpesa-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber, amount: calculateTotal() }),
+            });
+
+            const data = await response.json();
+            if (data.ResponseCode === "0") {
+                setSuccess('Payment initiated successfully. Check your phone to complete the transaction.');
+            } else {
+                setError('Failed to initiate payment. Please try again.');
+            }
+        } catch (error) {
+            setError('An error occurred. Please try again.');
+        }
+
+        setLoading(false);
+    };
 
     return (
         <div className="flex justify-center items-start p-8 bg-blue-100 min-h-screen">
@@ -97,14 +129,22 @@ const CheckOut = () => {
                     </form>
                 )}
                 {selectedPaymentMethod === 'mpesa' && (
-                    <form>
+                    <form onSubmit={handleMpesaPayment}>
                         <div className="mb-4">
                             <label className="block text-gray-700">Mpesa Phone Number</label>
-                            <input type="text" className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg" placeholder="07XX XXX XXX" />
+                            <input
+                                type="text"
+                                className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg"
+                                placeholder="07XX XXX XXX"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
                         </div>
-                        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-green-600">
-                            Make a Payment
+                        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-green-600" disabled={loading}>
+                            {loading ? 'Processing...' : 'Make a Payment'}
                         </button>
+                        {error && <p className="text-red-500 mt-2">{error}</p>}
+                        {success && <p className="text-green-500 mt-2">{success}</p>}
                     </form>
                 )}
                 {selectedPaymentMethod === 'paypal' && (
