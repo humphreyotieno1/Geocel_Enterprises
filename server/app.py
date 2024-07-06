@@ -1,9 +1,3 @@
-# from flask import Flask
-
-# from flask_migrate import Migrate
-# from flask_restful import Api
-# from flask_cors import CORS
-# from flask_jwt_extended import JWTManager
 
 #local imports
 from dbconfig import api,app
@@ -18,27 +12,9 @@ from routes.products import Products, ProductById
 from routes.orders import Orders, OrderById
 from routes.sign_up import SignUp
 from routes.login import Login
-
-# app = Flask(__name__)
-
-
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-# app.config["JWT_SECRET_KEY"] = "my_jwt_secret_key"
-# app.json.compact = False
+from routes.mpesa import SimulateC2B, Callback
 
 
-
-# jwt = JWTManager(app)
-
-# migrate = Migrate(app, db)
-# db.init_app(app)
-
-
-# api = Api(app)
-
-
-# CORS(app)
 
 api.add_resource(Home, '/')
 api.add_resource(Products, '/products')
@@ -57,6 +33,8 @@ api.add_resource(CartItems, '/cartitems')
 api.add_resource(CartItemById, '/cartitems/<int:id>')
 api.add_resource(SignUp, '/signup')
 api.add_resource(Login, '/login')
+api.add_resource(SimulateC2B, '/simulatec2b')
+api.add_resource(Callback, '/callback')
 
 
 
