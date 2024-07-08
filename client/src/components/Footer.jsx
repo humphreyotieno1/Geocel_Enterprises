@@ -8,8 +8,8 @@ const Footer = () => {
           {/* Contact Information */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-            <p className="text-gray-300">Telephone: +1234567890</p>
-            <p className="text-gray-300">Email: info@example.com</p>
+            <p className="text-gray-300">Telephone: +254 726 588 499</p>
+            <p className="text-gray-300">Email: geocelenterprises2020@gmail.com</p>
           </div>
 
           {/* Social Media Links */}
@@ -37,8 +37,7 @@ const Footer = () => {
           {/* Physical Address and Map */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Visit Us</h3>
-            <p className="text-gray-300">123 Company St, City, Country</p>
-            {/* Replace with your actual embedded map code */}
+            <p className="text-gray-300">Bondo Juction, Opp Siaya GK Prison, Siaya</p>
             <div className="mt-4">
               <iframe
                 title="Company Location"
@@ -50,6 +49,17 @@ const Footer = () => {
                 allowFullScreen
               ></iframe>
             </div>
+          </div>
+        </div>
+
+        {/* Partners Section */}
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-4">Our Partners</h3>
+          <div className="flex space-x-8 justify-center">
+            <img src="/path/to/partner1_logo.jpg" alt="Partner 1" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner2_logo.jpg" alt="Partner 2" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner3_logo.jpg" alt="Partner 3" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner4_logo.jpg" alt="Partner 4" className="h-16 w-16 object-contain" />
           </div>
         </div>
       </div>
