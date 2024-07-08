@@ -29,7 +29,7 @@ const About = () => {
   ];
 
   const Section = ({ title, children }) => (
-    <Box w="full">
+    <Box w="full" mb={10}>
       <Heading as="h2" mb={4} fontWeight="bold" fontSize={{ base: 'xl', md: '2xl' }}>
         {title}
       </Heading>
@@ -67,31 +67,31 @@ const About = () => {
 
   return (
     <Box p={6} id="about">
-      <Heading as="h1" mb={6} fontWeight="bold" fontSize={{ base: '2xl', md: '3xl' }}>
+      <Heading as="h1" mb={6} fontWeight="bold" fontSize={{ base: '2xl', md: '3xl' }} textAlign="center">
         About Us
       </Heading>
-      <VStack spacing={10} align="start" w="full">
+      <VStack spacing={10} align="center" w="full">
         <Section title="Company History">
-          <Text fontSize={{ base: 'md', md: 'lg' }}>
+          <Text fontSize={{ base: 'md', md: 'lg' }} textAlign="center">
             Geocel Enterprises was founded in 2012 by George Ouma. Starting as a small family business, it has grown into a leading provider of hardware and construction services in the region. Over the years, Geocel Enterprises has expanded its offerings and built a reputation for quality and reliability.
           </Text>
         </Section>
         <Section title="Core Values">
-          <Flex wrap="wrap" justify="space-between">
+          <Flex wrap="wrap" justify="center">
             {coreValues.map((value, index) => (
               <Card key={index} data={value} index={index} />
             ))}
           </Flex>
         </Section>
         <Section title="Leadership Team">
-          <Flex wrap="wrap" justify="space-between">
+          <Flex wrap="wrap" justify="center">
             {leadershipTeam.map((leader, index) => (
               <Card key={index} data={leader} index={index} />
             ))}
           </Flex>
         </Section>
         <Section title="Achievements and Milestones">
-          <Flex wrap="wrap" justify="space-between">
+          <Flex wrap="wrap" justify="center">
             {achievements.map((milestone, index) => (
               <Card key={index} data={milestone} index={index} />
             ))}

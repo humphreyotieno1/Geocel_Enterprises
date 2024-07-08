@@ -38,7 +38,6 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Visit Us</h3>
             <p className="text-gray-300">Bondo Juction, Opp Siaya GK Prison, Siaya</p>
-            {/* Replace with your actual embedded map code */}
             <div className="mt-4">
               <iframe
                 title="Company Location"
@@ -50,6 +49,17 @@ const Footer = () => {
                 allowFullScreen
               ></iframe>
             </div>
+          </div>
+        </div>
+
+        {/* Partners Section */}
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-4">Our Partners</h3>
+          <div className="flex space-x-8 justify-center">
+            <img src="/path/to/partner1_logo.jpg" alt="Partner 1" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner2_logo.jpg" alt="Partner 2" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner3_logo.jpg" alt="Partner 3" className="h-16 w-16 object-contain" />
+            <img src="/path/to/partner4_logo.jpg" alt="Partner 4" className="h-16 w-16 object-contain" />
           </div>
         </div>
       </div>
