@@ -8,8 +8,8 @@ const Footer = () => {
           {/* Contact Information */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-            <p className="text-gray-300">Telephone: +1234567890</p>
-            <p className="text-gray-300">Email: info@example.com</p>
+            <p className="text-gray-300">Telephone: +254 726 588 499</p>
+            <p className="text-gray-300">Email: geocelenterprises2020@gmail.com</p>
           </div>
 
           {/* Social Media Links */}
@@ -37,7 +37,7 @@ const Footer = () => {
           {/* Physical Address and Map */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Visit Us</h3>
-            <p className="text-gray-300">123 Company St, City, Country</p>
+            <p className="text-gray-300">Bondo Juction, Opp Siaya GK Prison, Siaya</p>
             {/* Replace with your actual embedded map code */}
             <div className="mt-4">
               <iframe
