@@ -1,97 +1,118 @@
-import React, { useState, useContext } from 'react';
-import { CartContext } from '../components/CartContext';
+import React, { useState, useEffect } from 'react';
 
-const ServiceRequestForm = ({ services }) => {
-  const { addToCart } = useContext(CartContext);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [selectedService, setSelectedService] = useState('');
-  const [details, setDetails] = useState('');
+const ServiceRequestForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    service: '',
+    message: '',
+  });
+  const [services, setServices] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Find the selected service object
-    const service = services.find(service => service.name === selectedService);
-
-    if (!service) {
-      alert("Please select a service.");
-      return;
-    }
-
-    // Create a service request object
-    const serviceRequest = {
-      name,
-      email,
-      service: service.name,
-      details
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/services');
+        const data = await response.json();
+        setServices(data);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      }
     };
 
-    // Add service to cart
-    addToCart(serviceRequest);
+    fetchServices();
+  }, []);
 
-    // Reset form fields
-    setName('');
-    setEmail('');
-    setSelectedService('');
-    setDetails('');
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    // Show confirmation to user
-    alert("Request submitted. We have received your service request.");
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-lg">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-        <input
-          type="text"
-          id="name"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-        <input
-          type="email"
-          id="email"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="service" className="block text-sm font-medium text-gray-700">Service</label>
-        <select
-          id="service"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          value={selectedService}
-          onChange={(e) => setSelectedService(e.target.value)}
-          required
-        >
-          <option value="">Select a service</option>
-          {services.map((service) => (
-            <option key={service.id} value={service.name}>{service.name}</option>
-          ))}
-        </select>
-      </div>
-      <div className="mb-4">
-        <label htmlFor="details" className="block text-sm font-medium text-gray-700">Additional Details</label>
-        <textarea
-          id="details"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          value={details}
-          onChange={(e) => setDetails(e.target.value)}
-        ></textarea>
-      </div>
-      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Submit Request
-      </button>
-    </form>
+    <div className="bg-white p-4 rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Request a Service</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="service" className="block text-sm font-medium text-gray-700">
+            Service
+          </label>
+          <select
+            id="service"
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+          >
+            <option value="">Select a service</option>
+            {services && services.length > 0 ? (
+              services.map((service) => (
+                <option key={service.id} value={service.name}>
+                  {service.name}
+                </option>
+              ))
+            ) : (
+              <option value="" disabled>
+                Loading services...
+              </option>
+            )}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div className="text-right">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-gray-800 text-white text-sm font-bold uppercase rounded hover:bg-gray-700"
+          >
+            Submit Request
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
