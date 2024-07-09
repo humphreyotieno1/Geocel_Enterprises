@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../components/CartContext.jsx';
 import Cart from '../components/Cart.jsx'; 
 import ServiceRequestForm from './ServiceRequestForm.jsx'; 
@@ -8,7 +7,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
   const { cartItems, addToCart } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  
 
   const toggleCart = () => {
     setShowModal(!showModal);
