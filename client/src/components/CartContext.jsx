@@ -5,31 +5,31 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (item, type) => {
+  const addToCart = (product) => {
     setCartItems(prevItems => {
-      const existingItem = prevItems.find(cartItem => cartItem.id === item.id && cartItem.type === type);
+      const existingItem = prevItems.find(item => item.name === product.name);
       if (existingItem) {
-        return prevItems.map(cartItem =>
-          cartItem.id === item.id && cartItem.type === type ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        return prevItems.map(item =>
+          item.name === product.name ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevItems, { ...item, quantity: 1, type }];
+        return [...prevItems, { ...product, quantity: 1 }];
       }
     });
   };
 
-  const removeFromCart = (id, type) => {
-    setCartItems(cartItems.filter(cartItem => cartItem.id !== id || cartItem.type !== type));
+  const removeFromCart = (name) => {
+    setCartItems(cartItems.filter(item => item.name !== name));
   };
 
   const clearCart = () => {
     setCartItems([]);
   };
 
-  const updateQuantity = (id, quantity, type) => {
+  const updateQuantity = (name, quantity) => {
     setCartItems(prevItems =>
-      prevItems.map(cartItem =>
-        cartItem.id === id && cartItem.type === type ? { ...cartItem, quantity } : cartItem
+      prevItems.map(item =>
+        item.name === name ? { ...item, quantity } : item
       )
     );
   };

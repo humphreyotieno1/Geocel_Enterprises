@@ -62,50 +62,57 @@ with app.app_context():
             {
                 "name": "Plaining",
                 "description": "Plaining",
+                "price": "5.00",
+                "duration": 120,  # Duration in minutes
+                "user_id": 1,
+            },
+            {
+                "name": "Plaining",
+                "description": "Plaining",
                 "price": "10.00",
-                "availability": True,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Transport",
                 "description": "Delivering your products safely",
                 "price": "500.00",
-                "availability": True,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Machine Work",
                 "description": "you can trust us with your machines",
                 "price": "50.00",
-                "availability": True,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Welding charges",
                 "description": "Welding charges",
                 "price": "3000.00",
-                "availability": True,  
+                "duration": 200,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Vibrator for hire",
                 "description": "Vibrator for hire",
                 "price": "0.00",
-                "availability": False,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Trappers for hire",
                 "description": "Trappers for hire",
                 "price": "140.00",
-                "availability": True,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
             {
                 "name": "Labor charge",
                 "description": "Labor charge",
                 "price": "0.00",
-                "availability": False,  
+                "duration": 120,  # Duration in minutes
                 "user_id": 1,
             },
         ]
