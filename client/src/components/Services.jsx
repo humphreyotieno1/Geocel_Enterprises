@@ -61,7 +61,7 @@ const Services = () => {
       <div className="mt-8">
         <ServiceRequestForm />
       </div>
-     
+      
       <Cart showModal={showModal} toggle={toggleCart} />
     </div>
   );
