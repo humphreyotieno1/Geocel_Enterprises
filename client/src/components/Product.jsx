@@ -170,7 +170,7 @@ const Products = ({ searchQuery }) => {
               <div className="mt-4 flex justify-between items-center">
                 <button
                   onClick={() => {
-                    addToCart(product, 'product');
+                    addToCart(selectedProduct);
                     closeQuickView();
                   }}
                   className="px-3 py-2 bg-gray-800 text-white text-sm font-semibold rounded hover:bg-gray-700"
