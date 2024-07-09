@@ -33,7 +33,7 @@ const ServiceRequestForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    
   };
 
   return (
