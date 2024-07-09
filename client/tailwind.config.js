@@ -1,16 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}"
-    ],
-    theme: {
-        extend: {
-            fontFamily: {
-                montserrat: ['Montserrat', 'sans-serif'],
-                raleway: ['Raleway', 'sans-serif']
-            }
-        },
-    },
-    plugins: [],
-}
+// tailwind.config.js
+module.exports = {
+  darkMode: 'class', // Enable dark mode if needed
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}", // Specify the files for Tailwind to scan for classes
+  ],
+  theme: {
+    extend: {}, // Extend the default Tailwind theme here if needed
+  },
+  plugins: [
+    require('@tailwindcss/forms'), // Enable Tailwind forms plugin for form styling
+  ],
+};
