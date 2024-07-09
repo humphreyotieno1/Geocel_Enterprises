@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../components/CartContext.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Cart = ({ showModal, toggle }) => {
+const Cart = ({ showModal, toggle }) => { // Receive props showModal and toggle from Services component
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useContext(CartContext);
   const navigate = useNavigate();
 

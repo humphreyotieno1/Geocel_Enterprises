@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../components/CartContext.jsx';
-import Cart from '../components/Cart.jsx'; // Import your Cart component
-import ServiceRequestForm from './ServiceRequestForm.jsx'; // Assuming this component is defined separately
+import Cart from '../components/Cart.jsx'; 
+import ServiceRequestForm from './ServiceRequestForm.jsx'; 
 
 const Services = () => {
   const [services, setServices] = useState([]);
   const { cartItems, addToCart } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  
 
   const toggleCart = () => {
     setShowModal(!showModal);
@@ -62,7 +61,7 @@ const Services = () => {
       <div className="mt-8">
         <ServiceRequestForm />
       </div>
-      {/* Render the Cart component with showModal and toggleCart props */}
+     
       <Cart showModal={showModal} toggle={toggleCart} />
     </div>
   );
