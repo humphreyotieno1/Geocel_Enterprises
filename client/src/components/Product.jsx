@@ -120,7 +120,7 @@ const Products = ({ searchQuery }) => {
                   Quick View
                 </button>
                 <button
-                  onClick={() => addToCart(product)}
+                  onClick={() => addToCart(product, 'product')}
                   className="px-2 py-1 sm:px-4 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
                 >
                   Add to Cart
