@@ -31,18 +31,18 @@ const coreValues = [
 const teams = [
   {
     image: 'https://via.placeholder.com/150',
-    name: 'John Doe',
-    position: 'CEO'
+    name: 'George Ouma',
+    position: 'Founder'
   },
   {
     image: 'https://via.placeholder.com/150',
-    name: 'Jane Smith',
-    position: 'CTO'
+    name: 'Celestine Wagumba',
+    position: 'Co-Founder'
   },
   {
     image: 'https://via.placeholder.com/150',
-    name: 'Sam Wilson',
-    position: 'CFO'
+    name: 'Humphrey Otieno',
+    position: 'Manager'
   },
 ];
 
