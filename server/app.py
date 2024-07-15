@@ -1,10 +1,28 @@
+from flask import request, jsonify
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
+from flask_cors import CORS
+import os
 
-#local imports
-from dbconfig import api,app
+from dbconfig import app, api 
 
+load_dotenv()
+
+CORS(app)
+
+app.config["MAIL_SERVER"] = "localhost"
+app.config["MAIL_PORT"] = 1025
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USERNAME"] = None
+app.config["MAIL_PASSWORD"] = None
+
+mail = Mail(app)
+
+
+# Flask-RESTful routes
 from routes.home import Home
 from routes.admins import Admins, AdminById
-from routes.users import Users,UserById
+from routes.users import Users, UserById
 from routes.categories import Categories, CategoryById
 from routes.cart_items import CartItems, CartItemById
 from routes.services import Services, ServiceById
@@ -13,8 +31,6 @@ from routes.orders import Orders, OrderById
 from routes.sign_up import SignUp
 from routes.login import Login
 from routes.mpesa import SimulateC2B, Callback
-
-
 
 api.add_resource(Home, '/')
 api.add_resource(Products, '/products')
@@ -37,9 +53,38 @@ api.add_resource(SimulateC2B, '/simulatec2b')
 api.add_resource(Callback, '/callback')
 
 
+@app.route('/contact', methods=['POST'])
+def contact():
+    data = request.get_json()
 
+    # Extract data fields
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    company = data.get('company')
+    email = data.get('email')
+    phone_number = data.get('phone_number')
+    message = data.get('message')
+    agreed = data.get('agreed')
 
-
+    msg = Message(
+        "Contact Form Submission",
+        sender="geocelenterprises2020@gmail.com",
+        recipients=['geocelenterprises2020@gmail.com']
+    )
+    msg.body = (f"""
+    First Name: {first_name}
+    Last Name: {last_name}
+    Company: {company}
+    Email: {email}
+    Phone Number: {phone_number}
+    Message: {message}
+    Agreed: {agreed}
+    """)
+    try:
+        mail.send(msg)
+        return jsonify({'message': 'Form submitted successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': 'Failed to send email', 'error': str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
