@@ -14,7 +14,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   const handleSearchChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    setSearchQuery(newQuery); // Pass the search query immediately
+    setSearchQuery(newQuery);
   };
 
   const handleSearchSubmit = (e) => {
@@ -31,11 +31,11 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
         </Link>
 
         <div className="hidden md:flex justify-center flex-1">
-          <Link to="/" className="mx-4">Home</Link>
-          <Link to="/products" className="mx-4">Products</Link>
-          <Link to="/services" className="mx-4">Services</Link>
-          <Link to="/about" className="mx-4">About</Link>
-          <Link to="/contact" className="mx-4">Contact</Link>
+          <Link to="/" className="mx-4 hover:text-gray-400">Home</Link>
+          <Link to="/products" className="mx-4 hover:text-gray-400">Products</Link>
+          <Link to="/services" className="mx-4 hover:text-gray-400">Services</Link>
+          <Link to="/about" className="mx-4 hover:text-gray-400">About</Link>
+          <Link to="/contact" className="mx-4 hover:text-gray-400">Contact</Link>
         </div>
 
         <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
@@ -51,7 +51,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           </button>
         </form>
 
-        <div className="hidden md:flex items-center ml-8" >
+        <div className="hidden md:flex items-center ml-8">
           {loggedIn ? (
             <Button onClick={onLogout} colorScheme="blue" leftIcon={<IoMdContact />} className="flex items-center space-x-1 rounded hover:bg-gray-600">
               Logout
@@ -72,11 +72,11 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
 
       {isOpen && (
         <div className="md:hidden bg-gray-800">
-          <Link to="/" className="block px-4 py-2">Home</Link>
-          <Link to="/products" className="block px-4 py-2">Products</Link>
-          <Link to="/services" className="block px-4 py-2">Services</Link>
-          <Link to="/about" className="block px-4 py-2">About</Link>
-          <Link to="/contact" className="block px-4 py-2">Contact</Link>
+          <Link to="/" className="block px-4 py-2 hover:bg-gray-700">Home</Link>
+          <Link to="/products" className="block px-4 py-2 hover:bg-gray-700">Products</Link>
+          <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
+          <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">About</Link>
+          <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">Contact</Link>
           <form onSubmit={handleSearchSubmit} className="px-4 py-2">
             <input
               type="text"
