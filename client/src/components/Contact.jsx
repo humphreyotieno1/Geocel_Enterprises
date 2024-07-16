@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Heading, VStack, Link, HStack, Icon } from '@chakra-ui/react';
-// import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function Contact() {
@@ -46,7 +46,7 @@ export default function Contact() {
       console.error('Error submitting form:', error);
       setResponseMessage('Error submitting form');
     }
-    console.log(formData);
+    // console.log(formData);
     // Clear form fields after submission
     setFormData({
       firstName: '',

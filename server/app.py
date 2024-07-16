@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from flask_cors import CORS
 import os
+import logging
 
 from dbconfig import app, api
 
@@ -10,11 +11,13 @@ load_dotenv()
 
 CORS(app)
 
-app.config["MAIL_SERVER"] = "localhost"
-app.config["MAIL_PORT"] = 1025
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USERNAME"] = None
-app.config["MAIL_PASSWORD"] = None
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER")
+
 
 mail = Mail(app)
 
@@ -68,8 +71,8 @@ def contact():
 
     msg = Message(
         "Contact Form Submission",
-        sender="geocelenterprises2020@gmail.com",
-        recipients=["geocelenterprises2020@gmail.com"],
+        sender= os.getenv('MAIL_DEFAULT_SENDER'),
+        recipients=[os.getenv('MAIL_DEFAULT_SENDER')],
     )
     msg.body = f"""
     First Name: {first_name}
@@ -84,6 +87,7 @@ def contact():
         mail.send(msg)
         return jsonify({"message": "Form submitted successfully"}), 200
     except Exception as e:
+        # logging.error(f"Error sending email: {e}")
         return jsonify({"message": "Failed to send email", "error": str(e)}), 500
 
 
@@ -99,8 +103,8 @@ def service_form():
 
     msg = Message(
         "Service Form Submission",
-        sender="geocelenterprises2020@gmail.com",
-        recipients=["geocelenterprises2020@gmail.com"],
+        sender= os.getenv('MAIL_DEFAULT_SENDER'),
+        recipients=[os.getenv('MAIL_DEFAULT_SENDER')],
     )
     
     msg.body = f"Name: {name}\nEmail: {email}\nService Requested: {service}\nMessage: {message}"
@@ -109,6 +113,7 @@ def service_form():
         mail.send(msg)
         return jsonify({"Message": "Form submitted successfully"}), 200
     except Exception as e:
+        # logging.error(f"Error sending email: {e}")
         return jsonify({"Message": "Failed to send email", "error": str(e)}), 500
 
 

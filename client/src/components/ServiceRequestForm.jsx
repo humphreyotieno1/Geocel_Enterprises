@@ -55,7 +55,7 @@ const ServiceRequestForm = () => {
       console.error('error submitting form', error)
       setResponseMessage('error submitting form')
     }
-    console.log(formData)
+    // console.log(formData)
 
     setFormData({
       name: '',
