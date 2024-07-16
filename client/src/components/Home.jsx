@@ -40,24 +40,24 @@ const HomePage = () => {
           alt="Geocel Enterprises Hardware"
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-80 p-8 rounded-lg text-center">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-80 p-4 md:p-8 rounded-lg text-center max-w-md md:max-w-3xl">
           <motion.h1
             initial={{ x: -100, opacity: 0 }}
             animate={titleControls}
-            className="text-4xl font-bold mb-4"
+            className="text-2xl md:text-4xl font-bold mb-2 md:mb-4"
           >
             Geocel Enterprises Hardware
           </motion.h1>
-          <p className="text-2xl text-gray-600">
+          <p className="text-lg md:text-2xl text-gray-600">
             Your partner for quality building materials
           </p>
-          <p className="text-xl text-gray-600 mt-4">
+          <p className="text-md md:text-xl text-gray-600 mt-2 md:mt-4">
             Welcome to Geocel Enterprises Hardware, a leading provider of quality products and services.
             We are dedicated to delivering exceptional solutions that meet the needs of our valued customers.
           </p>
           <a
             href="/products"
-            className="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded mt-6"
+            className="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4 md:mt-6"
           >
             Shop Now
           </a>
