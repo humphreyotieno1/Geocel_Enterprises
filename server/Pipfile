@@ -18,6 +18,7 @@ openpyxl = "*"
 flask-jwt-extended = "*"
 requests = "*"
 python-dotenv = "*"
+flask-mail = "*"
 
 [dev-packages]
 

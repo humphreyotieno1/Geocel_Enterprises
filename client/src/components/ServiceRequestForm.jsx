@@ -30,10 +30,39 @@ const ServiceRequestForm = () => {
       [name]: value,
     });
   };
+  
+  const [responseMessage, setResponseMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    try{
+      const response = await fetch('http://127.0.0.1:5000/service_form', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }) 
+      
+      if(response.ok){
+        const data = await response.json()
+        setResponseMessage(data.message)
+      }else{
+        setResponseMessage('Error submitting form')
+      }
+    } catch (error){
+      console.error('error submitting form', error)
+      setResponseMessage('error submitting form')
+    }
+    // console.log(formData)
+
+    setFormData({
+      name: '',
+      email: '',
+      service: '',
+      message: '',
+    })
   };
 
   return (
@@ -110,6 +139,7 @@ const ServiceRequestForm = () => {
           >
             Submit Request
           </button>
+          <p>{responseMessage}</p>
         </div>
       </form>
     </div>

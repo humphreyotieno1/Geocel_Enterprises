@@ -22,10 +22,31 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const [responseMessage, setResponseMessage] = useState('')
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    try {
+      const response = await fetch('http://127.0.0.1:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok){
+        const data = await response.json()
+        setResponseMessage(data.message);
+
+      } else{
+        setResponseMessage('Error submitting form')
+      }
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setResponseMessage('Error submitting form');
+    }
+    // console.log(formData);
     // Clear form fields after submission
     setFormData({
       firstName: '',
@@ -159,6 +180,7 @@ export default function Contact() {
             >
               Let's talk
             </button>
+            <p>{responseMessage}</p>
           </VStack>
         </form>
       </VStack>
