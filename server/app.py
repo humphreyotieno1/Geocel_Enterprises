@@ -58,11 +58,11 @@ def contact():
     data = request.get_json()
 
     # Extract data fields
-    first_name = data.get('first_name')
-    last_name = data.get('last_name')
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
     company = data.get('company')
     email = data.get('email')
-    phone_number = data.get('phone_number')
+    phone_number = data.get('phoneNumber')
     message = data.get('message')
     agreed = data.get('agreed')
 

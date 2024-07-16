@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Box, Heading, VStack, Link, HStack, Icon } from '@chakra-ui/react';
 // import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
