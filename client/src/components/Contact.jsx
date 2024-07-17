@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Heading, VStack, Link, HStack, Icon } from '@chakra-ui/react';
-import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { Box, Heading, VStack, Link, Center } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function Contact() {
@@ -22,7 +21,8 @@ export default function Contact() {
     }));
   };
 
-  const [responseMessage, setResponseMessage] = useState('')
+  const [responseMessage, setResponseMessage] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,19 +34,17 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok){
-        const data = await response.json()
+      if (response.ok) {
+        const data = await response.json();
         setResponseMessage(data.message);
-
-      } else{
-        setResponseMessage('Error submitting form')
+      } else {
+        setResponseMessage('Error submitting form');
       }
-      
     } catch (error) {
       console.error('Error submitting form:', error);
       setResponseMessage('Error submitting form');
     }
-    // console.log(formData);
+
     // Clear form fields after submission
     setFormData({
       firstName: '',
@@ -61,9 +59,11 @@ export default function Contact() {
 
   return (
     <Box p={6}>
-      <Heading as="h1" mb={6} fontSize="3xl" fontWeight="bold">
-        Contact Us
-      </Heading>
+      <Center>
+        <Heading as="h1" mb={6} fontSize="3xl" fontWeight="bold">
+          Contact Us
+        </Heading>
+      </Center>
 
       <VStack spacing={10} align="start">
         {/* Contact Form */}
@@ -113,40 +113,17 @@ export default function Contact() {
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               required
             />
-            <div className="relative mt-2.5">
-              <div className="absolute inset-y-0 left-0 flex items-center">
-                <label htmlFor="country" className="sr-only">
-                  Country
-                </label>
-                <select
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  className="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-                  required
-                >
-                  <option value="US">US</option>
-                  <option value="CA">CA</option>
-                  <option value="EU">EU</option>
-                </select>
-                <ChevronDownIcon
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                />
-              </div>
-              <input
-                id="phone-number"
-                name="phoneNumber"
-                type="tel"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                autoComplete="tel"
-                placeholder="Phone Number"
-                className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                required
-              />
-            </div>
+            <input
+              id="phone-number"
+              name="phoneNumber"
+              type="tel"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              autoComplete="tel"
+              placeholder="Phone Number"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              required
+            />
             <textarea
               id="message"
               name="message"

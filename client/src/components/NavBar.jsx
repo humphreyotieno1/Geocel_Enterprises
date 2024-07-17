@@ -26,7 +26,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
     <div className="bg-gray-800 text-white px-4">
       <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">
         <Link to="/" className="flex items-center text-xl font-bold">
-          <img src="/geocellogo.png" alt="Geocel Logo" className="h-8 w-auto mr-2" />
+          <img src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224367/GeocelDB/assets/logo.png" alt="Geocel Logo" className="h-8 w-auto mr-2" />
           GEOCEL ENTERPRISES
         </Link>
 
