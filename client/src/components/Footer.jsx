@@ -1,4 +1,5 @@
 import React from 'react';
+import MapboxMap from './MapboxMap'; // Adjust the path according to your project structure
 
 const Footer = () => {
   return (
@@ -39,15 +40,7 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-4">Visit Us</h3>
             <p className="text-gray-300">Bondo Juction, Opp Siaya GK Prison, Siaya</p>
             <div className="mt-4">
-              <iframe
-                title="Company Location"
-                width="100%"
-                height="200"
-                frameBorder="0"
-                style={{ border: 0 }}
-                src="https://www.google.com/maps/embed/v1/place?q=place_id&key=YOUR_API_KEY"
-                allowFullScreen
-              ></iframe>
+              <MapboxMap />
             </div>
           </div>
         </div>
