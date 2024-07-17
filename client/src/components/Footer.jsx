@@ -49,10 +49,10 @@ const Footer = () => {
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">Our Partners</h3>
           <div className="flex space-x-8 justify-center">
-            <img src="/path/to/partner1_logo.jpg" alt="Partner 1" className="h-16 w-16 object-contain" />
-            <img src="/path/to/partner2_logo.jpg" alt="Partner 2" className="h-16 w-16 object-contain" />
-            <img src="/path/to/partner3_logo.jpg" alt="Partner 3" className="h-16 w-16 object-contain" />
-            <img src="/path/to/partner4_logo.jpg" alt="Partner 4" className="h-16 w-16 object-contain" />
+            <img src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224326/GeocelDB/assets/bamburi.jpg" alt="Partner 1" className="h-16 w-16 object-contain" />
+            <img src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224326/GeocelDB/assets/coolbase.jpg" alt="Partner 2" className="h-16 w-16 object-contain" />
+            <img src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224326/GeocelDB/assets/crown.jpg" alt="Partner 3" className="h-16 w-16 object-contain" />
+            {/* <img src="/path/to/partner4_logo.jpg" alt="Partner 4" className="h-16 w-16 object-contain" /> */}
           </div>
         </div>
       </div>

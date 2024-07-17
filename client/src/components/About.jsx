@@ -30,18 +30,18 @@ const coreValues = [
 
 const teams = [
   {
-    image: 'https://via.placeholder.com/150',
+    image: 'https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224352/GeocelDB/assets/ceo.jpg',
     name: 'George Ouma',
     position: 'Founder'
   },
   {
     image: 'https://via.placeholder.com/150',
-    name: 'Celestine Wagumba',
+    name: 'Celestine W.',
     position: 'Co-Founder'
   },
   {
-    image: 'https://via.placeholder.com/150',
-    name: 'Humphrey Otieno',
+    image: 'https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224351/GeocelDB/assets/manager.jpg',
+    name: 'Humphrey O.',
     position: 'Manager'
   },
 ];
@@ -94,7 +94,7 @@ const About = () => {
 
         <Box className="flex flex-wrap justify-center py-10 bg-white shadow-lg rounded-lg">
           {teams.map((member, index) => (
-            <Box key={index} className="m-4 p-5 text-center">
+            <Box key={index} className="m-4 p-5 bg-gray-200 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
               <Image
                 src={member.image}
                 alt={member.name}
