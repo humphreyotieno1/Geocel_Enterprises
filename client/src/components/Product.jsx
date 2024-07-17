@@ -73,14 +73,14 @@ const Products = ({ searchQuery }) => {
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-      {/* Filter Panel */}
-      <CategorySelector
-        selectedCategory={selectedCategory}
-        handleCategoryChange={handleCategoryChange}
-        categories={categories}
-      />
+      <div className="md:w-1/4 p-4 sm:px-6 lg:px-10 xl:px-20 mt-10 md:mt-0">
+        <CategorySelector
+          selectedCategory={selectedCategory}
+          handleCategoryChange={handleCategoryChange}
+          categories={categories}
+        />
+      </div>
 
-      {/* Product Grid */}
       <div className="md:w-3/4 p-4 sm:px-6 lg:px-10 xl:px-20">
         {/* Header */}
         <div className="flex items-center justify-between">
