@@ -6,35 +6,44 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    const existingProduct = cartItems.find((item) => item.id === product.id);
-
-    if (existingProduct) {
-      setCartItems(cartItems.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.name === product.name);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.name === product.name ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const removeFromCart = (product) => {
-    setCartItems(cartItems.filter((item) => item.id !== product.id));
+    setCartItems((prevItems) => prevItems.filter((item) => item.name !== product.name));
   };
 
   const clearCart = () => {
     setCartItems([]);
   };
 
-  const updateQuantity = (product, quantity) => {
-    if (quantity > 0) {
-      setCartItems(cartItems.map((item) =>
-        item.id === product.id ? { ...item, quantity } : item
-      ));
-    }
+  const incrementQuantity = (productName) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) =>
+        item.name === productName ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    });
+  };
+
+  const decrementQuantity = (productName) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) =>
+        item.name === productName && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    });
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, updateQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity }}>
       {children}
     </CartContext.Provider>
   );
