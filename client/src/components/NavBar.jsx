@@ -26,7 +26,11 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
     <div className="bg-gray-800 text-white px-4">
       <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">
         <Link to="/" className="flex items-center text-xl font-bold">
-          <img src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224367/GeocelDB/assets/logo.png" alt="Geocel Logo" className="h-8 w-auto mr-2" />
+          <img
+            src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224367/GeocelDB/assets/logo.png"
+            alt="Geocel Logo"
+            className="h-8 w-auto mr-2"
+          />
           GEOCEL ENTERPRISES
         </Link>
 
@@ -53,12 +57,21 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
 
         <div className="hidden md:flex items-center ml-8">
           {loggedIn ? (
-            <Button onClick={onLogout} colorScheme="blue" leftIcon={<IoMdContact />} className="flex items-center space-x-1 rounded hover:bg-gray-600">
+            <Button
+              onClick={onLogout}
+              colorScheme="blue"
+              leftIcon={<IoMdContact />}
+              className="flex items-center space-x-1 rounded hover:bg-gray-600"
+            >
               Logout
             </Button>
           ) : (
             <Link to="/login">
-              <Button colorScheme="blue" leftIcon={<IoMdContact />} className="flex items-center space-x-1 rounded hover:bg-gray-600">
+              <Button
+                colorScheme="blue"
+                leftIcon={<IoMdContact />}
+                className="flex items-center space-x-1 rounded hover:bg-gray-600"
+              >
                 <span>Login / SignUp</span>
               </Button>
             </Link>
