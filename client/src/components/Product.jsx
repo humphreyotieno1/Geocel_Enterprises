@@ -86,7 +86,7 @@ const Products = ({ searchQuery }) => {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl uppercase font-bold mt-10 mb-8">Shop</h1>
           <button
-            className="px-3 py-2 bg-gray-800 text-white text-xs md:text-sm font-bold uppercase rounded hover:bg-gray-700"
+            className="px-2 py-1 md:px-4 md:py-2 bg-gray-800 text-white text-xs md:text-sm font-bold uppercase rounded hover:bg-gray-700"
             onClick={toggleCart}
           >
             Cart ({cartItems.length})
