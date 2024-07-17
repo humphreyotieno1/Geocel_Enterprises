@@ -86,7 +86,7 @@ const Products = ({ searchQuery }) => {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl uppercase font-bold mt-10 mb-8">Shop</h1>
           <button
-            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700"
+            className="px-3 py-2 bg-gray-800 text-white text-xs md:text-sm font-bold uppercase rounded hover:bg-gray-700"
             onClick={toggleCart}
           >
             Cart ({cartItems.length})
@@ -94,7 +94,7 @@ const Products = ({ searchQuery }) => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {paginatedProducts.map((product, index) => (
             <motion.div
               key={index}
@@ -115,13 +115,13 @@ const Products = ({ searchQuery }) => {
               <div className="mt-4 flex justify-between items-center">
                 <button
                   onClick={() => openQuickView(product)}
-                  className="px-2 py-1 sm:px-4 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
+                  className="px-2 py-1 sm:px-3 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
                 >
                   Quick View
                 </button>
                 <button
                   onClick={() => addToCart(product)}
-                  className="px-2 py-1 sm:px-4 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
+                  className="px-2 py-1 sm:px-3 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
                 >
                   Add to Cart
                 </button>
