@@ -34,15 +34,15 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           GEOCEL ENTERPRISES
         </Link>
 
-        <div className="hidden lg:flex justify-center flex-1">
+        {loggedIn && (<div className="hidden lg:flex justify-center flex-1">
           <Link to="/" className="mx-4 hover:text-gray-400">Home</Link>
           <Link to="/products" className="mx-4 hover:text-gray-400">Products</Link>
           <Link to="/services" className="mx-4 hover:text-gray-400">Services</Link>
           <Link to="/about" className="mx-4 hover:text-gray-400">About</Link>
           <Link to="/contact" className="mx-4 hover:text-gray-400">Contact</Link>
-        </div>
+        </div>)}
 
-        <form onSubmit={handleSearchSubmit} className="max-lg:hidden lg:flex items-center">
+        {loggedIn && (<form onSubmit={handleSearchSubmit} className="max-lg:hidden lg:flex items-center">
           <input
             type="text"
             value={query}
@@ -53,7 +53,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           <button type="submit" className="ml-2 px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
             Search
           </button>
-        </form>
+        </form>)}
 
         <div className="max-lg:hidden lg:flex items-center ml-8">
           {loggedIn ? (
@@ -72,7 +72,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
                 leftIcon={<IoMdContact />}
                 className="flex items-center space-x-1 rounded hover:bg-gray-600"
               >
-                <span>Login / Sign Up</span>
+                <span>Log In / Sign Up</span>
               </Button>
             </Link>
           )}
