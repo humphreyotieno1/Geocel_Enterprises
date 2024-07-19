@@ -112,10 +112,10 @@ const Products = ({ searchQuery }) => {
                 <p className="text-gray-700 text-xs sm:text-sm">{product.is_in_stock ? 'In Stock' : 'Out of Stock'}</p>
                 <p className="text-gray-700 text-xs sm:text-sm">{product.rating}</p>
               </div>
-              <div className="mt-4 flex justify-between items-center">
+              <div className="mt-4 flex flex-col sm:flex-row justify-between items-center">
                 <button
                   onClick={() => openQuickView(product)}
-                  className="px-2 py-1 sm:px-3 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
+                  className="mb-2 sm:mb-0 px-2 py-1 sm:px-3 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
                 >
                   Quick View
                 </button>
@@ -145,14 +145,14 @@ const Products = ({ searchQuery }) => {
       <AnimatePresence>
         {selectedProduct && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeQuickView}
           >
             <motion.div
-              className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4"
+              className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto"
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -50, opacity: 0 }}
@@ -167,13 +167,13 @@ const Products = ({ searchQuery }) => {
               <h3 className="text-lg font-bold">{selectedProduct.name}</h3>
               <p className="text-gray-700">{formatPrice(selectedProduct.price)}</p>
               <p className="mt-2 text-sm sm:text-base">{selectedProduct.description}</p>
-              <div className="mt-4 flex justify-between items-center">
+              <div className="mt-4 flex flex-col sm:flex-row justify-between items-center">
                 <button
                   onClick={() => {
                     addToCart(selectedProduct);
                     closeQuickView();
                   }}
-                  className="px-3 py-2 bg-gray-800 text-white text-sm font-semibold rounded hover:bg-gray-700"
+                  className="mb-2 sm:mb-0 px-3 py-2 bg-gray-800 text-white text-sm font-semibold rounded hover:bg-gray-700"
                 >
                   Add to Cart
                 </button>
