@@ -37,8 +37,8 @@ const Products = ({ searchQuery }) => {
     ? filteredProducts.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : filteredProducts;
 
-  const totalPages = Math.ceil(searchedProducts.length / itemsPerPage);
-  const paginatedProducts = searchedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Array.isArray(searchedProducts) ? Math.ceil(searchedProducts.length / itemsPerPage) : 0;
+  const paginatedProducts = Array.isArray(searchedProducts) ? searchedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) : [];
 
   useEffect(() => {
     const fetchProductsAndCategories = async () => {
@@ -47,6 +47,10 @@ const Products = ({ searchQuery }) => {
           fetch('http://localhost:5000/products'),
           fetch('http://localhost:5000/categories')
         ]);
+
+        if (!productsResponse.ok || !categoriesResponse.ok) {
+          throw new Error('Failed to fetch data');
+        }
 
         const productsData = await productsResponse.json();
         const categoriesData = await categoriesResponse.json();

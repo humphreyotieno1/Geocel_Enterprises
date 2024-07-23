@@ -14,7 +14,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   const handleSearchChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    setSearchQuery(newQuery);
+    setSearchQuery(newQuery); // Pass the search query immediately
   };
 
   const handleSearchSubmit = (e) => {
@@ -25,7 +25,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   return (
     <div className="bg-gray-800 text-white px-4">
       <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">
-        <Link to="/" className="flex items-center md:text-xl lg:text-2xl font-bold">
+        <Link to="/" className="flex items-center text-xl font-bold">
           <img
             src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224367/GeocelDB/assets/logo.png"
             alt="Geocel Logo"
@@ -34,7 +34,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           GEOCEL ENTERPRISES
         </Link>
 
-        <div className="hidden lg:flex justify-center flex-1">
+        <div className="hidden md:flex justify-center flex-1">
           <Link to="/" className="mx-4 hover:text-gray-400">Home</Link>
           <Link to="/products" className="mx-4 hover:text-gray-400">Products</Link>
           <Link to="/services" className="mx-4 hover:text-gray-400">Services</Link>
@@ -43,7 +43,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
         </div>
 
         {loggedIn && (
-          <form onSubmit={handleSearchSubmit} className="max-lg:hidden lg:flex items-center">
+          <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
             <input
               type="text"
               value={query}
@@ -57,7 +57,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           </form>
         )}
 
-        <div className="max-lg:hidden lg:flex items-center ml-8">
+        <div className="hidden md:flex items-center ml-8">
           {loggedIn ? (
             <Button
               onClick={onLogout}
@@ -80,13 +80,13 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           )}
         </div>
 
-        <button className="lg:hidden flex items-center" onClick={toggleDropdown}>
+        <button className="md:hidden flex items-center" onClick={toggleDropdown}>
           ☰
         </button>
       </div>
 
       {isOpen && (
-        <div className="lg:hidden bg-gray-800">
+        <div className="md:hidden bg-gray-800">
           <Link to="/" className="block px-4 py-2 hover:bg-gray-700">Home</Link>
           <Link to="/products" className="block px-4 py-2 hover:bg-gray-700">Products</Link>
           <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
