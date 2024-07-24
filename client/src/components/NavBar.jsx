@@ -40,10 +40,8 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           <Link to="/services" className="mx-4 hover:text-gray-400">Services</Link>
           <Link to="/about" className="mx-4 hover:text-gray-400">About</Link>
           <Link to="/contact" className="mx-4 hover:text-gray-400">Contact</Link>
-        </div>
-
-        {loggedIn && (
-          <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
+          {/* Search Form always visible */}
+          <form onSubmit={handleSearchSubmit} className="ml-4 flex items-center">
             <input
               type="text"
               value={query}
@@ -55,7 +53,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
               Search
             </button>
           </form>
-        )}
+        </div>
 
         <div className="hidden md:flex items-center ml-8">
           {loggedIn ? (
@@ -92,20 +90,18 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
           <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">About</Link>
           <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">Contact</Link>
-          {loggedIn && (
-            <form onSubmit={handleSearchSubmit} className="px-4 py-2">
-              <input
-                type="text"
-                value={query}
-                onChange={handleSearchChange}
-                placeholder="Search..."
-                className="px-2 py-1 text-black rounded w-full"
-              />
-              <button type="submit" className="mt-2 w-full px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
-                Search
-              </button>
-            </form>
-          )}
+          <form onSubmit={handleSearchSubmit} className="px-4 py-2">
+            <input
+              type="text"
+              value={query}
+              onChange={handleSearchChange}
+              placeholder="Search..."
+              className="px-2 py-1 text-black rounded w-full"
+            />
+            <button type="submit" className="mt-2 w-full px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
+              Search
+            </button>
+          </form>
           <div className="px-4 py-2">
             {loggedIn ? (
               <Button onClick={onLogout} colorScheme="blue" className="w-full">
