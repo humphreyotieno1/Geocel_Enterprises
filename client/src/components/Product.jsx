@@ -102,33 +102,40 @@ const Products = ({ searchQuery }) => {
           {paginatedProducts.map((product, index) => (
             <motion.div
               key={index}
-              className="bg-white shadow-md rounded-lg p-4 sm:p-6 relative group"
+              className="bg-white shadow-md rounded-lg overflow-hidden p-4 sm:p-6 relative group"
               whileHover={{ scale: 1.05 }}
             >
-              <img
-                src={product.imageUrl}
-                alt={product.imageAlt}
-                className="rounded-md h-48 object-cover w-full"
-              />
+              <div className="relative w-full h-48">
+                <img
+                  className="w-full h-full object-cover"
+                  src={product.imageUrl}
+                  alt={product.imageAlt}
+                />
+                {product.is_on_sale && (
+                  <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                    SALE
+                  </div>
+                )}
+              </div>
               <div className="mt-4">
                 <h1 className="font-bold text-sm sm:text-base">{product.name}</h1>
                 <p className="text-gray-700 text-xs sm:text-sm">{formatPrice(product.price)}</p>
                 <p className="text-gray-700 text-xs sm:text-sm">{product.is_in_stock ? 'In Stock' : 'Out of Stock'}</p>
                 <p className="text-gray-700 text-xs sm:text-sm">{product.rating}</p>
-              </div>
-              <div className="mt-4 flex flex-col sm:flex-row justify-between items-center">
-                <button
-                  onClick={() => openQuickView(product)}
-                  className="mb-2 sm:mb-0 px-2 py-1 sm:px-3 sm:py-2 bg-gray-200 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-300"
-                >
-                  Quick View
-                </button>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="px-2 py-1 sm:px-3 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
-                >
-                  Add to Cart
-                </button>
+                <div className="mt-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                  <button
+                    onClick={() => openQuickView(product)}
+                    className="mb-2 sm:mb-0 px-2 py-1 sm:px-3 sm:py-2 bg-gray-300 text-gray-700 text-xs sm:text-sm font-semibold rounded hover:bg-gray-400"
+                  >
+                    Quick View
+                  </button>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="px-2 py-1 sm:px-3 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded hover:bg-gray-700"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}
