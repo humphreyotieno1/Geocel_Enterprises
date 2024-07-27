@@ -24,7 +24,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
 
   return (
     <div className="bg-gray-800 text-white px-4">
-      <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between h-16 max-w-7xl mx-auto overflow-hidden">
         <Link to="/" className="flex items-center text-xl font-bold">
           <img
             src="https://res.cloudinary.com/drdradtyj/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1721224367/GeocelDB/assets/logo.png"
@@ -41,7 +41,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           <Link to="/about" className="mx-4 hover:text-gray-400">About</Link>
           <Link to="/contact" className="mx-4 hover:text-gray-400">Contact</Link>
           {/* Search Form always visible */}
-          <form onSubmit={handleSearchSubmit} className="ml-4 flex items-center">
+          {/* <form onSubmit={handleSearchSubmit} className="ml-4 flex items-center">
             <input
               type="text"
               value={query}
@@ -52,10 +52,10 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
             <button type="submit" className="ml-2 px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
               Search
             </button>
-          </form>
+          </form> */}
         </div>
 
-        <div className="hidden md:flex items-center ml-8">
+        <div className="hidden md:flex items-center ml-4 md:ml-8">
           {loggedIn ? (
             <Button
               onClick={onLogout}
@@ -90,7 +90,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
           <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">About</Link>
           <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">Contact</Link>
-          <form onSubmit={handleSearchSubmit} className="px-4 py-2">
+          {/* <form onSubmit={handleSearchSubmit} className="px-4 py-2">
             <input
               type="text"
               value={query}
@@ -101,7 +101,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
             <button type="submit" className="mt-2 w-full px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
               Search
             </button>
-          </form>
+          </form> */}
           <div className="px-4 py-2">
             {loggedIn ? (
               <Button onClick={onLogout} colorScheme="blue" className="w-full">

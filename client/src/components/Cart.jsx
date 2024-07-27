@@ -26,7 +26,7 @@ const Cart = ({ showModal, toggle }) => {
           onClick={toggle}
         >
           <motion.div
-            className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4 relative overflow-y-auto"
+            className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4 relative overflow-y-auto overflow-x-hidden"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
