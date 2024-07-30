@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
-import { IoMdContact } from 'react-icons/io';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
+import { IoMdContact } from "react-icons/io";
+import { FaSearch } from 'react-icons/fa'
 
 export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -22,6 +24,16 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
     setSearchQuery(query);
   };
 
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    if (!query) {
+      setIsFocused(false);
+    }
+  };
+
   return (
     <div className="bg-gray-800 text-white px-4">
       <div className="flex items-center justify-between h-16 max-w-7xl mx-auto overflow-hidden">
@@ -35,24 +47,39 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
         </Link>
 
         <div className="hidden md:flex justify-center flex-1">
-          <Link to="/" className="mx-4 hover:text-gray-400">Home</Link>
-          <Link to="/products" className="mx-4 hover:text-gray-400">Products</Link>
-          <Link to="/services" className="mx-4 hover:text-gray-400">Services</Link>
-          <Link to="/about" className="mx-4 hover:text-gray-400">About</Link>
-          <Link to="/contact" className="mx-4 hover:text-gray-400">Contact</Link>
+          <Link to="/" className="mx-4 hover:text-gray-400">
+            Home
+          </Link>
+          <Link to="/products" className="mx-4 hover:text-gray-400">
+            Products
+          </Link>
+          <Link to="/services" className="mx-4 hover:text-gray-400">
+            Services
+          </Link>
+          <Link to="/about" className="mx-4 hover:text-gray-400">
+            About
+          </Link>
+          <Link to="/contact" className="mx-4 hover:text-gray-400">
+            Contact
+          </Link>
           {/* Search Form always visible */}
-          {/* <form onSubmit={handleSearchSubmit} className="ml-4 flex items-center">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="ml-4 flex items-center relative"
+          >
+            <FaSearch className="text-gray-500 absolute left-2" />
             <input
               type="text"
               value={query}
               onChange={handleSearchChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               placeholder="Search..."
-              className="px-2 py-1 text-black rounded"
+              className={`pl-8 pr-2 py-1 text-black rounded transition-width duration-300 ease-in-out ${
+                isFocused ? "w-64" : "w-0 opacity-0"
+              }`}
             />
-            <button type="submit" className="ml-2 px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
-              Search
-            </button>
-          </form> */}
+          </form>
         </div>
 
         <div className="hidden md:flex items-center ml-4 md:ml-8">
@@ -78,30 +105,48 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           )}
         </div>
 
-        <button className="md:hidden flex items-center" onClick={toggleDropdown}>
+        <button
+          className="md:hidden flex items-center"
+          onClick={toggleDropdown}
+        >
           ☰
         </button>
       </div>
 
       {isOpen && (
         <div className="md:hidden bg-gray-800">
-          <Link to="/" className="block px-4 py-2 hover:bg-gray-700">Home</Link>
-          <Link to="/products" className="block px-4 py-2 hover:bg-gray-700">Products</Link>
-          <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
-          <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">About</Link>
-          <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">Contact</Link>
-          {/* <form onSubmit={handleSearchSubmit} className="px-4 py-2">
+          <Link to="/" className="block px-4 py-2 hover:bg-gray-700">
+            Home
+          </Link>
+          <Link to="/products" className="block px-4 py-2 hover:bg-gray-700">
+            Products
+          </Link>
+          <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">
+            Services
+          </Link>
+          <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">
+            About
+          </Link>
+          <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">
+            Contact
+          </Link>
+          <form
+            onSubmit={handleSearchSubmit}
+            className="ml-4 flex items-center relative"
+          >
+            <FaSearch className="text-gray-500 absolute left-2" />
             <input
               type="text"
               value={query}
               onChange={handleSearchChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               placeholder="Search..."
-              className="px-2 py-1 text-black rounded w-full"
+              className={`pl-8 pr-2 py-1 text-black rounded transition-width duration-300 ease-in-out ${
+                isFocused ? "w-64" : "w-0 opacity-0"
+              }`}
             />
-            <button type="submit" className="mt-2 w-full px-2 py-1 bg-blue-500 rounded hover:bg-blue-600">
-              Search
-            </button>
-          </form> */}
+          </form>
           <div className="px-4 py-2">
             {loggedIn ? (
               <Button onClick={onLogout} colorScheme="blue" className="w-full">
