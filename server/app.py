@@ -4,8 +4,10 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import os
 import logging
+from itsdangerous import URLSafeTimedSerializer
 
-from dbconfig import app, api
+from dbconfig import app, api, db
+from models.user import User
 
 load_dotenv()
 
@@ -17,9 +19,11 @@ app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
 app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 
 mail = Mail(app)
+s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 
 # Flask-RESTful routes
@@ -115,6 +119,54 @@ def service_form():
     except Exception as e:
         # logging.error(f"Error sending email: {e}")
         return jsonify({"Message": "Failed to send email", "error": str(e)}), 500
+    
+
+@app.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.get_json()
+    email = data.get('email')
+    
+    # Verify if email exists in the database
+    user = User.query.filter_by(email=email).first()
+    if user:
+        token = s.dumps(email, salt='password-reset-salt')
+        reset_url = f"http://localhost:5173/reset-password/{token}"  # Replace with your React app domain
+        subject = "Password Reset Request"
+        body = f"""Dear {user.user_name},\n\n
+        We received a request to reset your password. Please click the link below to reset your password:\n
+        {reset_url}\n\n
+        If you did not request a password reset, please ignore this email.\n\n
+        Regards,\n
+        Geocel Enterprises\n
+        """
+
+        msg = Message(
+            subject, sender="Geocel Enterprises <geocelenterprises2020@gmail.com>", recipients=[user.email]
+        )
+        msg.body = body
+        mail.send(msg)
+        
+    return jsonify({"message": "If an account with that email exists, you will receive a password reset email."}), 200
+    
+
+@app.route('/reset-password/<token>', methods=['GET','POST'])
+def reset_password(token):
+    try:
+        email = s.loads(token, salt='password-reset-salt', max_age=3600) #Token valid for 1 hr
+    except:
+        return jsonify({"message": "The token is invalid or has expired"}), 400 
+    
+    if request.method == 'POST':
+        data = request.get_json()
+        new_password = data.get("new_password")
+        
+        #update user's password
+        user = User.query.filter_by(email=email).first()
+        if user:
+            user.set_password(new_password)
+            db.session.commit() 
+            return jsonify({"message": "Your password has been reset successfully"}), 200
+    return jsonify({"message": "Please provide a new password"}), 200
 
 
 if __name__ == "__main__":
