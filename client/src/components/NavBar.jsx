@@ -90,7 +90,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
               leftIcon={<IoMdContact />}
               className="flex items-center space-x-1 rounded hover:bg-gray-600"
             >
-              Logout
+              Sign Out
             </Button>
           ) : (
             <Link to="/login">
@@ -99,7 +99,7 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
                 leftIcon={<IoMdContact />}
                 className="flex items-center space-x-1 rounded hover:bg-gray-600"
               >
-                <span>Log In / Sign Up</span>
+                <span>Sign In</span>
               </Button>
             </Link>
           )}
@@ -149,13 +149,13 @@ export default function NavBar({ setSearchQuery, loggedIn, onLogout }) {
           </form>
           <div className="px-4 py-2">
             {loggedIn ? (
-              <Button onClick={onLogout} colorScheme="blue" className="w-full">
-                Logout
+              <Button onClick={onLogout} colorScheme="blue" className="w-1/3 sm:w-1/3 mx-auto">
+                Sign Out
               </Button>
             ) : (
               <Link to="/login">
-                <Button colorScheme="blue" className="w-full">
-                  Login
+                <Button colorScheme="blue" className="w-1/3 sm:w-1/3 mx-auto">
+                  Sign In
                 </Button>
               </Link>
             )}

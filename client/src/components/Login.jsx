@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = ({ onLogin }) => {
@@ -8,11 +8,13 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleRememberMeChange = () => setRememberMe(!rememberMe);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ const Login = ({ onLogin }) => {
           setRememberMe(false);
           setTimeout(() => setMessage(""), 3000); // Clear the message after 3 seconds
           onLogin(data.access_token);
+          navigate("/products");
         } else throw new Error("Token not found in response");
       })
       .catch((error) => {
