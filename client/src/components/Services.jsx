@@ -7,7 +7,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
   const { cartItems, addToCart } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
-  
+  const [error, setError] = useState(null); // To store any potential errors
 
   const toggleCart = () => {
     setShowModal(!showModal);
@@ -15,9 +15,21 @@ const Services = () => {
 
   useEffect(() => {
     const fetchServices = async () => {
-      const response = await fetch('http://127.0.0.1:5000/services');
-      const data = await response.json();
-      setServices(data);
+      try {
+        const response = await fetch('http://127.0.0.1:5000/services');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setServices(data);
+        } else {
+          setError('Unexpected data format from server');
+        }
+      } catch (error) {
+        console.error('Error fetching services:', error);
+        setError('Failed to load services');
+      }
     };
     fetchServices();
   }, []);
@@ -36,27 +48,32 @@ const Services = () => {
         <h1 className="text-3xl font-bold">Our Services</h1>
         <p className="text-lg">We offer a range of services to meet your needs.</p>
       </div>
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {services.map((service) => (
-          <div key={service.id} className="bg-white p-4 rounded-md shadow-md">
-            <h3 className="text-xl font-bold">{service.name}</h3>
-            <p className="mt-2">{service.description}</p>
-            <p className="mt-2 font-bold">{service.price}</p>
-            <span
-              className={`mt-2 inline-block px-2 py-1 rounded text-white ${
-                service.availability ? 'bg-green-500' : 'bg-red-500'
-              }`}
-            >
-              {service.availability ? 'Available' : 'Subject to Scheduling'}
-            </span>
-            <span
-              className="mt-2 ml-2 inline-block px-2 py-1 rounded text-white bg-gray-800 cursor-pointer"
-              onClick={() => addToCart(service, 'service')}
-            >
-              Add to Cart
-            </span>
-          </div>
-        ))}
+        {services.length > 0 ? (
+          services.map((service) => (
+            <div key={service.id} className="bg-white p-4 rounded-md shadow-md">
+              <h3 className="text-xl font-bold">{service.name}</h3>
+              <p className="mt-2">{service.description}</p>
+              <p className="mt-2 font-bold">{service.price}</p>
+              <span
+                className={`mt-2 inline-block px-2 py-1 rounded text-white ${
+                  service.availability ? 'bg-green-500' : 'bg-red-500'
+                }`}
+              >
+                {service.availability ? 'Available' : 'Subject to Scheduling'}
+              </span>
+              <span
+                className="mt-2 ml-2 inline-block px-2 py-1 rounded text-white bg-gray-800 cursor-pointer"
+                onClick={() => addToCart(service, 'service')}
+              >
+                Add to Cart
+              </span>
+            </div>
+          ))
+        ) : (
+          !error && <p className="text-center">Loading services...</p>
+        )}
       </div>
       <div className="mt-8">
         <ServiceRequestForm />

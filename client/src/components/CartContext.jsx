@@ -5,37 +5,45 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (item, type) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(cartItem => cartItem.id === item.id && cartItem.type === type);
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.name === product.name);
       if (existingItem) {
-        return prevItems.map(cartItem =>
-          cartItem.id === item.id && cartItem.type === type ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        return prevItems.map((item) =>
+          item.name === product.name ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevItems, { ...item, quantity: 1, type }];
+        return [...prevItems, { ...product, quantity: 1 }];
       }
     });
   };
 
-  const removeFromCart = (id, type) => {
-    setCartItems(cartItems.filter(cartItem => cartItem.id !== id || cartItem.type !== type));
+  const removeFromCart = (product) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.name !== product.name));
   };
 
   const clearCart = () => {
     setCartItems([]);
   };
 
-  const updateQuantity = (id, quantity, type) => {
-    setCartItems(prevItems =>
-      prevItems.map(cartItem =>
-        cartItem.id === id && cartItem.type === type ? { ...cartItem, quantity } : cartItem
-      )
-    );
+  const incrementQuantity = (productName) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) =>
+        item.name === productName ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    });
+  };
+
+  const decrementQuantity = (productName) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) =>
+        item.name === productName && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    });
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, updateQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity }}>
       {children}
     </CartContext.Provider>
   );

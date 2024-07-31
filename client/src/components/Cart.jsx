@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../components/CartContext.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Cart = ({ showModal, toggle }) => { // Receive props showModal and toggle from Services component
-  const { cartItems, removeFromCart, clearCart, updateQuantity } = useContext(CartContext);
+const Cart = ({ showModal, toggle }) => {
+  const { cartItems, removeFromCart, clearCart, incrementQuantity, decrementQuantity } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -26,7 +26,7 @@ const Cart = ({ showModal, toggle }) => { // Receive props showModal and toggle 
           onClick={toggle}
         >
           <motion.div
-            className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4 relative overflow-y-auto"
+            className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full mx-4 relative overflow-y-auto overflow-x-hidden"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
@@ -52,19 +52,25 @@ const Cart = ({ showModal, toggle }) => { // Receive props showModal and toggle 
                       <p className="text-gray-600 text-sm">Price: {item.price} kshs</p>
                       <p className="text-gray-600 text-sm">Total: {(item.price * item.quantity).toFixed(2)} kshs</p>
                       <div className="flex items-center mt-2">
-                        <input
-                          type="number"
-                          min="1"
-                          value={item.quantity}
-                          onChange={(e) => updateQuantity(item.name, parseInt(e.target.value))}
-                          className="w-16 px-2 py-1 border rounded"
-                        />
+                        <button
+                          className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                          onClick={() => decrementQuantity(item.name)}
+                        >
+                          -
+                        </button>
+                        <span className="mx-2">{item.quantity}</span>
+                        <button
+                          className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                          onClick={() => incrementQuantity(item.name)}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                     <div className="flex items-center">
                       <button
                         className="px-2 py-1 bg-red-500 text-white text-xs sm:text-sm rounded hover:bg-red-600"
-                        onClick={() => removeFromCart(item.name)}
+                        onClick={() => removeFromCart(item)}
                       >
                         Remove
                       </button>
