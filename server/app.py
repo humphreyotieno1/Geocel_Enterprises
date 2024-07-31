@@ -5,6 +5,7 @@ from flask_cors import CORS
 import os
 import logging
 from itsdangerous import URLSafeTimedSerializer
+from email.utils import formataddr
 
 from dbconfig import app, api, db
 from models.user import User
@@ -141,7 +142,7 @@ def forgot_password():
         """
 
         msg = Message(
-            subject, sender="Geocel Enterprises <geocelenterprises2020@gmail.com>", recipients=[user.email]
+            subject, sender=formataddr(("Geocel Enterprises", "geocelenterprises2020@gmail.com")), recipients=[user.email]
         )
         msg.body = body
         mail.send(msg)

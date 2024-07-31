@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+
 
 
 const ForgotPassword = () => {
@@ -7,7 +7,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState('')
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [timer, setTimer] = useState(30);
-    const navigate = useNavigate()
+  
     
 
     useEffect(() => {
