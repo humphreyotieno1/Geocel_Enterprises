@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Signup = () => {
@@ -9,6 +9,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -49,6 +50,7 @@ const Signup = () => {
         setConfirmPassword("");
         setMessage("Signup successful!");
         setTimeout(() => setMessage(""), 3000); // Clear the message after 3 seconds
+        navigate("/products");
       })
       .catch((error) => {
         setMessage(error.message);

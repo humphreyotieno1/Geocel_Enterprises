@@ -1,7 +1,11 @@
 import React from 'react';
+import useScreenSize from '../hooks/useScreenSize';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pageNumbersToShow = 10;
+  const screenSize = useScreenSize();
+  const isSmallScreen = screenSize < 640;
+  const pageNumbersToShow = isSmallScreen ? 5 : 10;
+
   let startPage = Math.max(currentPage - Math.floor(pageNumbersToShow / 2), 1);
   let endPage = startPage + pageNumbersToShow - 1;
 
@@ -22,7 +26,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             disabled={currentPage === 1}
             onClick={() => onPageChange(currentPage - 1)}
-            className={`px-3 py-2 border rounded ${currentPage === 1 ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
+            className={`px-2 py-1 sm:px-3 sm:py-2 border rounded ${currentPage === 1 ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
           >
             Previous
           </button>
@@ -30,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-3 py-2 border rounded ${page === currentPage ? 'bg-gray-800 text-white' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
+              className={`px-2 py-1 sm:px-3 sm:py-2 border rounded ${page === currentPage ? 'bg-gray-800 text-white' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
             >
               {page}
             </button>
@@ -38,7 +42,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             disabled={currentPage === totalPages}
             onClick={() => onPageChange(currentPage + 1)}
-            className={`px-3 py-2 border rounded ${currentPage === totalPages ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
+            className={`px-2 py-1 sm:px-3 sm:py-2 border rounded ${currentPage === totalPages ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-200'}`}
           >
             Next
           </button>
@@ -47,5 +51,4 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     </div>
   );
 };
-
 export default Pagination;
