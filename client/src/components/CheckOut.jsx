@@ -77,24 +77,24 @@ const CheckOut = () => {
 
             {/* Payment Form */}
             <div className="w-full lg:w-2/3 bg-white p-4 lg:p-6 rounded-lg shadow-lg mt-4 lg:mt-6 lg:ml-8">
-                <h2 className="text-xl lg:text-2xl mb-4">Payment Details</h2>
+                <h2 className="flex justify-center text-xl lg:text-2xl mb-4">Payment Details</h2>
                 <div className="mb-4">
-                    <div className="flex flex-col sm:flex-row mb-2">
+                    <div className="flex justify-center flex-col sm:flex-row  sm:space-x-3 mb-2">
                         <button
-                            className="w-full sm:w-1/2 p-2 border border-gray-300 rounded-lg sm:rounded-l-lg bg-white text-center hover:bg-gray-100"
+                            className="w-full sm:w-1/3 p-2 border border-gray-300 rounded-lg sm:rounded-l-lg bg-white text-center hover:bg-gray-100"
                             onClick={() => setSelectedPaymentMethod('card')}
                         >
                             <img src={visaLogo} alt="Visa" className="inline-block h-10 lg:h-20" />
                             <img src={mastercardLogo} alt="Mastercard" className="inline-block h-10 lg:h-20" />
                         </button>
                         <button
-                            className="w-full sm:w-1/3 p-2 border border-gray-300 rounded-lg sm:rounded-r-none bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
+                            className="w-full sm:w-1/4 p-2 border border-gray-300 rounded-lg sm:rounded-r-none bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
                             onClick={() => setSelectedPaymentMethod('mpesa')}
                         >
                             <img src={mpesaLogo} alt="Mpesa" className="inline-block h-10 lg:h-20" />
                         </button>
                         <button
-                            className="w-full sm:w-1/3 p-2 border border-gray-300 rounded-lg sm:rounded-r-lg bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
+                            className="w-full sm:w-1/4 p-2 border border-gray-300 rounded-lg sm:rounded-r-lg bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
                             onClick={() => setSelectedPaymentMethod('paypal')}
                         >
                             <img src={paypalLogo} alt="PayPal" className="inline-block h-10 lg:h-20" />
@@ -102,47 +102,51 @@ const CheckOut = () => {
                     </div>
                 </div>
                 {selectedPaymentMethod === 'card' && (
-                    <form>
+                    <div className="flex justify-center">
+                        <form className="w-full max-w-lg">
                         <div className="mb-4">
                             <label className="block text-gray-700">Card Number</label>
                             <input type="text" className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg" placeholder="1234 - 4567 - 8901 - 2345" />
                         </div>
                         <div className="flex flex-col lg:flex-row mb-4">
                             <div className="w-full lg:w-1/2 lg:mr-2 mb-4 lg:mb-0">
-                                <label className="block text-gray-700">Card Holder Name</label>
-                                <input type="text" className="w-full p-2 border border-gray-300 bg-blue-100  rounded-lg" placeholder="Miki Nagai" />
+                            <label className="block text-gray-700">Card Holder Name</label>
+                            <input type="text" className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg" placeholder="Miki Nagai" />
                             </div>
                             <div className="w-full lg:w-1/4 lg:mr-2 mb-4 lg:mb-0">
-                                <label className="block text-gray-700">CVC</label>
-                                <input type="text" className="w-full p-2 border border-gray-300  bg-blue-100 rounded-lg" placeholder="123" />
+                            <label className="block text-gray-700">CVC</label>
+                            <input type="text" className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg" placeholder="123" />
                             </div>
                             <div className="w-full lg:w-1/4">
-                                <label className="block text-gray-700">Expiration Date</label>
-                                <DatePicker
-                                    selected={expirationDate}
-                                    onChange={(date) => setExpirationDate(date)}
-                                    dateFormat="MM/yyyy"
-                                    showMonthYearPicker
-                                    className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg"
-                                    placeholderText="MM / YYYY"
-                                />
+                            <label className="block text-gray-700">Expiration Date</label>
+                            <DatePicker
+                                selected={expirationDate}
+                                onChange={(date) => setExpirationDate(date)}
+                                dateFormat="MM/yyyy"
+                                showMonthYearPicker
+                                className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg"
+                                placeholderText="MM / YYYY"
+                            />
                             </div>
                         </div>
                         <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-orange-600">
                             Make a Payment
                         </button>
-                    </form>
+                        </form>
+                    </div>
                 )}
+
                 {selectedPaymentMethod === 'mpesa' && (
-                    <form onSubmit={handleMpesaPayment}>
+                    <div className="flex justify-center">
+                        <form onSubmit={handleMpesaPayment} className="w-full max-w-lg">
                         <div className="mb-4">
                             <label className="block text-gray-700">Mpesa Phone Number</label>
                             <input
-                                type="text"
-                                className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg"
-                                placeholder="2547XXXXXXXX"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            type="text"
+                            className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg"
+                            placeholder="2547XXXXXXXX"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
                             />
                         </div>
                         <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-green-600" disabled={loading}>
@@ -150,10 +154,13 @@ const CheckOut = () => {
                         </button>
                         {error && <p className="text-red-500 mt-2">{error}</p>}
                         {success && <p className="text-green-500 mt-2">{success}</p>}
-                    </form>
+                        </form>
+                    </div>
                 )}
+
                 {selectedPaymentMethod === 'paypal' && (
-                    <form>
+                    <div className="flex justify-center">
+                        <form className="w-full max-w-lg">
                         <div className="mb-4">
                             <label className="block text-gray-700">PayPal Email</label>
                             <input type="email" className="w-full p-2 border border-gray-300 bg-blue-100 rounded-lg" placeholder="you@example.com" />
@@ -161,7 +168,8 @@ const CheckOut = () => {
                         <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-gray-800">
                             Make a Payment
                         </button>
-                    </form>
+                        </form>
+                    </div>
                 )}
             </div>
         </div>
