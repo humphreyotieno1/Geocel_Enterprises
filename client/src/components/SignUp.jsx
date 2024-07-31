@@ -49,8 +49,11 @@ const Signup = () => {
         setEmail("");
         setConfirmPassword("");
         setMessage("Signup successful!");
-        setTimeout(() => setMessage(""), 3000); // Clear the message after 3 seconds
-        navigate("/products");
+        setTimeout(() => {
+          setMessage("")
+          navigate("/products");
+        }, 3000); // Clear the message after 3 seconds
+        
       })
       .catch((error) => {
         setMessage(error.message);
