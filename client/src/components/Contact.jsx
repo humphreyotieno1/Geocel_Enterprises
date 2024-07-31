@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, Heading, VStack, Link, Center } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -58,17 +57,17 @@ export default function Contact() {
   };
 
   return (
-    <Box p={6}>
+    <Box p={6} maxW="xl" mx="auto" overflow="hidden">
       <Center>
         <Heading as="h1" mb={6} fontSize="3xl" fontWeight="bold">
           Contact Us
         </Heading>
       </Center>
 
-      <VStack spacing={10} align="start">
+      <VStack spacing={6} align="start" width="100%">
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
-          <VStack spacing={6} align="start" width="100%" maxWidth="xl">
+        <form onSubmit={handleSubmit} className="w-full">
+          <VStack spacing={4} align="start" width="100%">
             <input
               id="first-name"
               name="firstName"

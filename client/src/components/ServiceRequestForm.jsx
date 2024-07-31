@@ -30,43 +30,42 @@ const ServiceRequestForm = () => {
       [name]: value,
     });
   };
-  
+
   const [responseMessage, setResponseMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try{
+    try {
       const response = await fetch('http://127.0.0.1:5000/service_form', {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      }) 
-      
-      if(response.ok){
-        const data = await response.json()
-        setResponseMessage(data.message)
-      }else{
-        setResponseMessage('Error submitting form')
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setResponseMessage(data.message);
+      } else {
+        setResponseMessage('Error submitting form');
       }
-    } catch (error){
-      console.error('error submitting form', error)
-      setResponseMessage('error submitting form')
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setResponseMessage('Error submitting form');
     }
-    // console.log(formData)
 
     setFormData({
       name: '',
       email: '',
       service: '',
       message: '',
-    })
+    });
   };
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-md">
+    <div className="bg-white p-4 rounded-md shadow-md max-w-xl mx-auto overflow-hidden">
       <h2 className="text-2xl font-bold mb-4">Request a Service</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -80,6 +79,7 @@ const ServiceRequestForm = () => {
             value={formData.name}
             onChange={handleChange}
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+            required
           />
         </div>
         <div className="mb-4">
@@ -93,6 +93,7 @@ const ServiceRequestForm = () => {
             value={formData.email}
             onChange={handleChange}
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+            required
           />
         </div>
         <div className="mb-4">
@@ -105,6 +106,7 @@ const ServiceRequestForm = () => {
             value={formData.service}
             onChange={handleChange}
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+            required
           >
             <option value="">Select a service</option>
             {services && services.length > 0 ? (
@@ -130,6 +132,8 @@ const ServiceRequestForm = () => {
             value={formData.message}
             onChange={handleChange}
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+            rows={4}
+            required
           />
         </div>
         <div className="text-right">

@@ -76,8 +76,8 @@ const Products = ({ searchQuery }) => {
   const formatPrice = (price) => `kshs ${price.toFixed(2)}`;
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-      <div className="md:w-1/4 p-4 sm:px-6 lg:px-10 xl:px-20 mt-10 md:mt-0">
+    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen overflow-x-hidden">
+      <div className="md:w-1/4 p-4 sm:px-6 lg:px-8 xl:px-10 mt-10 md:mt-0">
         <CategorySelector
           selectedCategory={selectedCategory}
           handleCategoryChange={handleCategoryChange}
@@ -85,7 +85,7 @@ const Products = ({ searchQuery }) => {
         />
       </div>
 
-      <div className="md:w-3/4 p-4 sm:px-6 lg:px-10 xl:px-20">
+      <div className="md:w-3/4 p-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl uppercase font-bold mt-10 mb-8">Shop</h1>
@@ -163,7 +163,7 @@ const Products = ({ searchQuery }) => {
             onClick={closeQuickView}
           >
             <motion.div
-              className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto"
+              className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto overflow-x-hidden"
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -50, opacity: 0 }}
