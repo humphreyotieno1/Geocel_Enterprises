@@ -45,7 +45,7 @@ export default function App() {
             {/* Routes accessible to all users */}
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products searchQuery={searchQuery} />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<Services searchQuery={searchQuery} />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
