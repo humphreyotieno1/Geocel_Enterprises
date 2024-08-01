@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('http://127.0.0.1:5000/forgot-password', {
+        fetch('https://geocel-enterprises.onrender.com/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ email }),

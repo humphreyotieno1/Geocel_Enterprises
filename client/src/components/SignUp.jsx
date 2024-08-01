@@ -31,7 +31,7 @@ const Signup = () => {
       return;
     }
 
-    fetch("http://127.0.0.1:5000/signup", {
+    fetch("https://geocel-enterprises.onrender.com/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_name: username, password: password, email: email }),
