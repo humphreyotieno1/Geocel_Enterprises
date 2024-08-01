@@ -44,8 +44,8 @@ const Products = ({ searchQuery }) => {
     const fetchProductsAndCategories = async () => {
       try {
         const [productsResponse, categoriesResponse] = await Promise.all([
-          fetch('http://localhost:5000/products'),
-          fetch('http://localhost:5000/categories')
+          fetch('https://geocel-enterprises.onrender.com/products'),
+          fetch('https://geocel-enterprises.onrender.com/categories')
         ]);
 
         if (!productsResponse.ok || !categoriesResponse.ok) {
