@@ -80,25 +80,25 @@ const CheckOut = () => {
                 <h2 className="flex justify-center text-xl lg:text-2xl mb-4">Payment Details</h2>
                 <div className="mb-4">
                     <div className="flex justify-center flex-col sm:flex-row  sm:space-x-3 mb-2">
-                        <button
+                        {/* <button
                             className="w-full sm:w-1/3 p-2 border border-gray-300 rounded-lg sm:rounded-l-lg bg-white text-center hover:bg-gray-100"
                             onClick={() => setSelectedPaymentMethod('card')}
                         >
                             <img src={visaLogo} alt="Visa" className="inline-block h-10 lg:h-20" />
                             <img src={mastercardLogo} alt="Mastercard" className="inline-block h-10 lg:h-20" />
-                        </button>
+                        </button> */}
                         <button
                             className="w-full sm:w-1/4 p-2 border border-gray-300 rounded-lg sm:rounded-r-none bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
                             onClick={() => setSelectedPaymentMethod('mpesa')}
                         >
                             <img src={mpesaLogo} alt="Mpesa" className="inline-block h-10 lg:h-20" />
                         </button>
-                        <button
+                        {/* <button
                             className="w-full sm:w-1/4 p-2 border border-gray-300 rounded-lg sm:rounded-r-lg bg-gray-100 text-center text-gray-400 mt-2 sm:mt-0"
                             onClick={() => setSelectedPaymentMethod('paypal')}
                         >
                             <img src={paypalLogo} alt="PayPal" className="inline-block h-10 lg:h-20" />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 {selectedPaymentMethod === 'card' && (

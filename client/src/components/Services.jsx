@@ -3,7 +3,7 @@ import { CartContext } from '../components/CartContext.jsx';
 import Cart from '../components/Cart.jsx'; 
 import ServiceRequestForm from './ServiceRequestForm.jsx'; 
 
-const Services = () => {
+const Services = ({ searchQuery }) => {
   const [services, setServices] = useState([]);
   const { cartItems, addToCart } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
@@ -34,6 +34,10 @@ const Services = () => {
     fetchServices();
   }, []);
 
+  const filteredServices = services.filter(service =>
+    service.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
       <div className="text-right mb-8">
@@ -50,8 +54,8 @@ const Services = () => {
       </div>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {services.length > 0 ? (
-          services.map((service) => (
+        {filteredServices.length > 0 ? (
+          filteredServices.map((service) => (
             <div key={service.id} className="bg-white p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold">{service.name}</h3>
               <p className="mt-2">{service.description}</p>
