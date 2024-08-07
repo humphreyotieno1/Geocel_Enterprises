@@ -61,6 +61,10 @@ export default function App() {
               path="/checkout" 
               element={loggedIn ? <CheckOut /> : <Navigate to="/login" />} 
             />
+
+           {/* Catch-all route */}
+             <Route path="*" element={<NotFound />} />
+             
           </Routes>
           <Footer /> {/* Include the Footer component outside of Routes */}
         </div>
