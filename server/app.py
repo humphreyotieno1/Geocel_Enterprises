@@ -131,7 +131,7 @@ def forgot_password():
     user = User.query.filter_by(email=email).first()
     if user:
         token = s.dumps(email, salt='password-reset-salt')
-        reset_url = f"https://geocel-enterprises.vercel.app/reset-password/{token}"  # Replace with your React app domain
+        reset_url = f"https://geocel-enterprises.vercel.app/reset-password?token={token}"  # Replace with your React app domain
         subject = "Password Reset Request"
         body = f"""Dear {user.user_name},\n\n
         We received a request to reset your password. Please click the link below to reset your password:\n
