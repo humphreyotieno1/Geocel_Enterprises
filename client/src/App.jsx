@@ -14,6 +14,8 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import { CartProvider } from './components/CartContext';
 import Footer from './components/Footer'; // Import the Footer component
+import NotFound from './components/NotFound';
+
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
