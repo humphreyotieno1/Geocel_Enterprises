@@ -12,7 +12,7 @@ const ServiceRequestForm = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/services');
+        const response = await fetch('https://geocel-enterprises.onrender.com/services');
         const data = await response.json();
         setServices(data);
       } catch (error) {
@@ -37,7 +37,7 @@ const ServiceRequestForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/service_form', {
+      const response = await fetch('https://geocel-enterprises.onrender.com/service_form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

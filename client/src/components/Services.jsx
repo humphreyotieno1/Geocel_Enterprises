@@ -16,7 +16,7 @@ const Services = ({ searchQuery }) => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/services');
+        const response = await fetch('https://geocel-enterprises.onrender.com/services');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
