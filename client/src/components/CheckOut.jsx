@@ -32,7 +32,7 @@ const CheckOut = () => {
             const totalAmount = Math.round(parseFloat(calculateTotal()));
             console.log("Amount:", totalAmount)
 
-            const response = await fetch('http://127.0.0.1:5000/simulatec2b', {
+            const response = await fetch('https://geocel-enterprises.onrender.com/simulatec2b', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
