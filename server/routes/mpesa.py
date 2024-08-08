@@ -22,7 +22,7 @@ encoded_credentials = base64.b64encode(f"{consumer_key}:{consumer_secret}".encod
 
 
 def get_access_token():
-    url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
     headers = {
         'Authorization': f'Basic {encoded_credentials}'  # Replace with your base64 encoded consumer key:secret
     }
@@ -45,7 +45,7 @@ class SimulateC2B(Resource):
 
         try:
             access_token = get_access_token()  # Retrieves a new access token
-            api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+            api_url = "https://api.safaricom.co.ke/mpesa/stkpushquery/v1/query"
             headers = {"Authorization": f"Bearer {access_token}"}
 
             timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
