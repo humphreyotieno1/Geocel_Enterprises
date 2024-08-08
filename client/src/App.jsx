@@ -14,7 +14,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import { CartProvider } from './components/CartContext';
 import Footer from './components/Footer'; // Import the Footer component
-import NotFound from './components/NotFound';
+
 
 
 export default function App() {
@@ -63,10 +63,6 @@ export default function App() {
               path="/checkout" 
               element={loggedIn ? <CheckOut /> : <Navigate to="/login" />} 
             />
-
-           {/* Catch-all route */}
-             <Route path="*" element={<NotFound />} />
-             
           </Routes>
           <Footer /> {/* Include the Footer component outside of Routes */}
         </div>
