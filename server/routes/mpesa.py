@@ -68,7 +68,7 @@ class SimulateC2B(Resource):
                 "PartyA": phone_number,
                 "PartyB": shortcode,
                 "PhoneNumber": phone_number,
-                "CallBackURL": "/callback",  # Replace with your callback URL
+                "CallBackURL": "https://geocel-enterprises-ltd.onrender.com/callback",  # Replace with your callback URL
                 "AccountReference": "Test123",
                 "TransactionDesc": "Payment for goods"
             }
